@@ -1,1 +1,1 @@
-[Enlase al Miro con el Canvas del Equipo](https://miro.com/app/board/uXjVN0ZA9DI=/?share_link_id=28768358626)
+[Enlace al Miro con el Canvas del Equipo](https://miro.com/app/board/uXjVN0ZA9DI=/?share_link_id=28768358626)
