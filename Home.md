@@ -2,7 +2,9 @@
 
 ## Visión del Proyecto:
 * Estructura del negocio
-* Visión que se tiene del producto de software: Visual Story Map, Project Vision, entre otros.
+* Visión que se tiene del producto de software:
+    - Visual Story Map
+    - Project Vision
 ## Requerimientos: (La información debe estar organizada por sprints)
 * Historias de usuario
 * Definición de reglas de negocio
@@ -13,4 +15,4 @@
 * Esta sección contiene información para el usuario sobre el uso, configuración y demás operaciones del software en construcción. Se deben almacenar y versionar documentos tales como: Manuales de referencia, Manuales de Usuario, Manuales de Instalación y Configuración y Material de entrenamiento.
 ## Seguimiento y Control (La información debe estar organizada por sprints.)
 * Esta sección está diseñada para almacenar y versionar las evidencias de la realización de las actividades de seguimiento y control del proyecto. Ej. Sprint Review, Sprint Retrospective, Daily Meeting, Burndown, Canvas, informes de control, gestión de cambios.
-* Agregar el flujo de trabajo en la wiki
+* [Flujo de Trabajo](Flujo-de-trabajo)
