@@ -24,7 +24,8 @@ Equipo: 23
 
 * Definición de reglas de negocio
 
-* Mockups y en algunos casos prototipos. 
+* Mockups y en algunos casos prototipos
+
 ### Arquitectura del Sistema
 * El objetivo de esta sección es proveer información útil para que los desarrolladores entiendan el sistema, contiene artefactos como la arquitectura técnica, la arquitectura de negocio y requerimientos de alto nivel. | Scrum Master, Developers | Sí
 ### Documentación para Usuarios 
