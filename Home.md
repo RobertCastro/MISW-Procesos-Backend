@@ -21,7 +21,9 @@ Equipo: 23
     - Project Vision
 ### Requerimientos: (La información debe estar organizada por sprints)
 * Historias de usuario
+
 * Definición de reglas de negocio
+
 * Mockups y en algunos casos prototipos. 
 ### Arquitectura del Sistema
 * El objetivo de esta sección es proveer información útil para que los desarrolladores entiendan el sistema, contiene artefactos como la arquitectura técnica, la arquitectura de negocio y requerimientos de alto nivel. | Scrum Master, Developers | Sí
