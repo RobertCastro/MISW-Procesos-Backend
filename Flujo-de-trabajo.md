@@ -2,8 +2,8 @@
 
 | Nombre | Ubicación (url/directorio) | Propósito |
 |--------|-----------------------------|-----------|
-|MISW4201-202411-Backend-Grupo23|https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23|Desarrollo del proyecto para el curso: Procesos de desarrollo ágil |
-|        |                             |           |
+|MISW4201-202411-Backend-Grupo23|https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23|Desarrollo del backend del proyecto para el curso: Procesos de desarrollo ágil |
+|  MISW4201-202411-Frontend-Grupo23      |            https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Frontend-Grupo23                 |   Código Interfaz de usuario      |
 
 ## Ramas
 
