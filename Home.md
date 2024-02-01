@@ -1,5 +1,17 @@
 # Documentacion Proyecto MISW4201-202411-Backend-Grupo23
 
+## Datos del Equipo
+Nombre del grupo: Compumundo Hipermegared
+
+Equipo: 23
+
+| Apellidos          | Nombres             | Usuario Uniandes | Usuario Github         |
+|---------------------|---------------------|------------------|------------------------|
+| Alas Escalante      | Maria del Mar       | m.alas           | [mar-alas]             |
+| Gamez Salcedo       | Daniel Alfonso      | da.gamez96       | [DaGamez]              |
+| Castro              | Robert Albeiro      | ra.castro2       | [soyrobert]            |
+| Puentes Nuñez       | Jhon Freddy         | j.puentesn       | [jhonfreddypuentes]    |
+
 ## Visión del Proyecto:
 * Estructura del negocio
 * Visión que se tiene del producto de software:
