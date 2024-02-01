@@ -16,3 +16,4 @@
 ## Seguimiento y Control (La información debe estar organizada por sprints.)
 * Esta sección está diseñada para almacenar y versionar las evidencias de la realización de las actividades de seguimiento y control del proyecto. Ej. Sprint Review, Sprint Retrospective, Daily Meeting, Burndown, Canvas, informes de control, gestión de cambios.
 * [Flujo de Trabajo](Flujo-de-trabajo)
+* [Canvas](Canvas)
