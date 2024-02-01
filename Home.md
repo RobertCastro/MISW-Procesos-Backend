@@ -17,7 +17,7 @@ Equipo: 23
 ### Visión del Proyecto:
 * Estructura del negocio
 * Visión que se tiene del producto de software:
-    - [Visual Story Map](Visual-Story-Map)
+    - Visual Story Map
     - Project Vision
 ### Requerimientos: (La información debe estar organizada por sprints)
 * Historias de usuario
