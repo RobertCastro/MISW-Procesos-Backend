@@ -1,3 +1,6 @@
+### Canvas de equipo
+* [Ver canvas de equipo](canvas-de-equipo)
+
 ### Visión del Proyecto
 * [User Story Map Daniel](User-Story-Map-Daniel)
 * [User Story Map Robert](User-Story-Map-Robert)
