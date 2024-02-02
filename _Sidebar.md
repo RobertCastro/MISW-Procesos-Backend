@@ -1,5 +1,6 @@
-### Canvas de equipo
+### Equipo
 * [Ver canvas de equipo](canvas-de-equipo)
+* [Asignación de roles](asignacion-roles)
 
 ### Visión del Proyecto
 * [User Story Map Daniel](User-Story-Map-Daniel)
