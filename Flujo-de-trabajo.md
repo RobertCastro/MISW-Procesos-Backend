@@ -9,16 +9,17 @@
 
 | Nombre rama | Propósito |
 |-------------|-----------|
-|main|Contiene todo el código listo para ser desplegado |
-|develop| |
-|feature| |
-
+|main|La rama principal se utiliza para combinar y desplegar en el entorno de producción el trabajo realizado por todos los miembros del equipo.|
+|develop|Esta rama incluye las nuevas funcionalidades que se planean añadir en la próxima versión que será enviada a la rama Main. |
+|hotfix| Esta rama contiene la versión de producción que presenta un fallo crítico que necesita corrección inmediata. Tras solucionar el problema, se fusiona con la rama Main y develop para corregir el fallo en todas ellas. |
+|release| Esta rama es una réplica de Develop, preparada o casi preparada para el lanzamiento en producción. |
+|feature/funcionalidad|Esta rama es una réplica exacta de Develop y se utiliza para el desarrollo de nuevas funcionalidades en un entorno seguro. Una vez que estas funcionalidades están listas para ser lanzadas, se integran en Develop para su inclusión en futuras versiones. |
 
 ## Acuerdos
 
 | Acción | Quién | Cuándo | Dónde |
 |--------|-------|--------|-------|
-|Hacer commit |  | | Repositorio local |
+|Integrar los cambios en la rama Main. | Todos los integrantes. | Continuamente durante la etapa de desarrollo. | Repositorio local |
 |Hacer push |  | | Repositorio local |
 |Hacer pull |  |  |
 |Resolver conflictos | | | Repositorio local |
