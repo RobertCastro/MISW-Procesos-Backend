@@ -6,6 +6,7 @@
 * [User Story Map Daniel](User-Story-Map-Daniel)
 * [User Story Map Robert](User-Story-Map-Robert)
 * [User Story Map Maria](User-Story-Map-Maria)
+* [User Story Map Jhon](User-Story-Map-Jhon)
 * [Audio Dueño Producto](Audio-Dueño-Producto)
 * [Respuesta preguntas a cliente](https://uniandes-my.sharepoint.com/:x:/g/personal/misovirtual-da_uniandes_edu_co/Eddi4rmZ-5dFvIULdgnjgX0Bs7Q8RaOGoKu-j17PZLCaOA)
 
