@@ -11,11 +11,17 @@
 
 ### Requerimientos
 * [HU](HU)
+
 ### Arquitectura del Sistema
 * [Arquitectura](Arquitectura)
+
 ### Documentación para Usuarios
 * [Manuales](manuales)
+
 ### Seguimiento y Control
+* [Proyecto de Jira](proyecto-de-jira)
+
+
 #### Sprint 0
 * [Flujo de Trabajo](Flujo-de-trabajo)
 * [Canvas de equipo](Canvas)
