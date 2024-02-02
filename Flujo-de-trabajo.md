@@ -19,8 +19,9 @@
 
 | Acción | Quién | Cuándo | Dónde |
 |--------|-------|--------|-------|
-|Integrar los cambios en la rama Main. | Todos los integrantes. | Continuamente durante la etapa de desarrollo. | Repositorio local |
-|Hacer push |  | | Repositorio local |
-|Hacer pull |  |  |
-|Resolver conflictos | | | Repositorio local |
-|Comentar commit erróneos |  | | Repositorio local |
+|Integrar los cambios en la rama Main | Todos los integrantes | Continuamente durante la etapa de desarrollo. | Repositorio remoto |
+|Comentarios de acuerdo a las funcionalidades | Todos los integrantes | Al hacer un commit | En cada rama creada |
+|Resolver conflictos | Todos los integrantes | Al identificar un conflicto | Rama feature local |
+|Crear rama de acuerdo a la funcionalidad feature/funcionalidad | Todos los integrantes | Al iniciar el desarrollo de cada funcionalidad | En cada rama creada |
+|Revisión de código | Todos los integrantes | Antes de fusionar con Main y Develop | En la rama feature |
+|Entrega continua | Todos los integrantes | Con cada cambio significativo | En la rama feature|
