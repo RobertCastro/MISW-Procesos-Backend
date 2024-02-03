@@ -3,6 +3,7 @@
 * [Asignación de roles](asignacion-roles)
 
 ### Visión del Proyecto
+* [User Story Map Consolidado Grupo](User-Story-Map-Grupo)
 * [User Story Map Daniel](User-Story-Map-Daniel)
 * [User Story Map Robert](User-Story-Map-Robert)
 * [User Story Map Maria](User-Story-Map-Maria)
