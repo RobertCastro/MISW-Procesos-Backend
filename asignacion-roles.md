@@ -1,9 +1,9 @@
 # Asignación de roles
 
 ## Sprint 1:
-- Scrum Master: TBD
-- Representante Product Owner:TBD
+- Scrum Master: Jhon Freddy Puentes
+- Representante Product Owner: Daniel Gamez
 
 ## Sprint 2:
-- Scrum Master: TBD
-- Representante Product Owner: TBD
+- Scrum Master: Robert
+- Representante Product Owner: Maria Alas
