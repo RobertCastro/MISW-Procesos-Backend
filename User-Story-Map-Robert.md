@@ -1,2 +1,2 @@
-[Link MIRO Mapa Historia de Usuario Robert](https://miro.com/welcomeonboard/M29LUG9SSEUzcVVEaTFGUGVWemFOUWVDbEJickZsQmpoRjNJZnNkbHlNOGQ0OXBObWpjVW5ZVEhxTWgzODRyWnwzNDU4NzY0NTYyNDU2NDM4MDMyfDI=?share_link_id=589512714634)
+[Link MIRO Mapa Historia de Usuario Robert](https://miro.com/app/board/uXjVNzX8eFo=/?share_link_id=774956280970)
 
