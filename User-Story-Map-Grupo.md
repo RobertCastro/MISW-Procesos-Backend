@@ -1,1 +1,1 @@
-[Miro User Story Map Grupo](https://miro.com/app/board/uXjVNx7EDVw=/)
+[Miro User Story Map Grupo](https://miro.com/app/board/uXjVNx7EDVw=/?share_link_id=404965791157)
