@@ -1,1 +1,1 @@
-[Link MIRO Mapa Historia de Usuario Daniel](https://miro.com/welcomeonboard/djFCM0t0WUswdWpmVUgzZnlrQXFOaldKeGxOQmluWkpmakN6bWdHMkp5c1pZRUdHaENjUzZQUXV3VmxTNTBmWnwzNDU4NzY0NTc3MTQ4NjY5Nzk2fDI=?share_link_id=721086591550)
+[Link MIRO Mapa Historia de Usuario Daniel](https://miro.com/app/board/uXjVNy3bAOw=/?share_link_id=321722425573)
