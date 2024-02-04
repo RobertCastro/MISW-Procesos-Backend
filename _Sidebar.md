@@ -12,7 +12,7 @@
 * [Respuesta preguntas a cliente](https://uniandes-my.sharepoint.com/:x:/g/personal/misovirtual-da_uniandes_edu_co/Eddi4rmZ-5dFvIULdgnjgX0Bs7Q8RaOGoKu-j17PZLCaOA)
 
 ### Requerimientos
-* [Backlog Historias de Usuario](Backlog-Historias-Usuario)
+* [Backlog Historias de Usuario](proyecto-de-jira)
 
 ### Arquitectura del Sistema
 * [Arquitectura](Arquitectura)
