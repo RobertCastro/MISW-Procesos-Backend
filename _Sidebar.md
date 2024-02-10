@@ -24,7 +24,7 @@
 * [Proyecto de Jira](proyecto-de-jira)
 
 ### Estimación de Riesgos
-* [Estimación de Riesgos](riesgos)
+* [Estimación de Riesgos](Estimación-de-Riesgos)
 
 #### Sprint 0
 * [Flujo de Trabajo](Flujo-de-trabajo)
