@@ -1,0 +1,1 @@
+[Documento de Estimación de Riesgos](https://uniandes-my.sharepoint.com/:x:/g/personal/da_gamez96_uniandes_edu_co/EXMNBrPluvREocfYSjtcKzsB64vR8e0gUQkfxXefFqSuTQ?e=rQMc35)
