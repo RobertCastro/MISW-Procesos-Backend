@@ -27,9 +27,13 @@
 |Entrega continua | Todos los integrantes | Con cada cambio significativo | En la rama feature|
 
 ## URLs ambientes en Heroku
+
 Producción frontend: https://cortaestancia-frontend-grupo23-1a91c70c014c.herokuapp.com/ 
+
 Producción backend: https://cortaestancia-backend-grupo23-b0c55df4af13.herokuapp.com/ 
+
 Desarrollo frontend: en proceso de despliegue con el tutor 
+
 Desarrollo backend: en proceso de despliegue con el tutor 
 
 
