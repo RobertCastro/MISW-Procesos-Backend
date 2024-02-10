@@ -17,6 +17,8 @@ El propósito de mi Corta Estancia es permitir la administración por un tercero
 
 <details>
   <summary><h2>Requerimientos</h2></summary>
+
+[Backlog en Jira](proyecto-de-jira)
   
 Código | Nombre | Detalle
 -- | -- | --
