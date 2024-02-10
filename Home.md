@@ -59,6 +59,6 @@ Decisión |
 
 
 ## Arquitectura
-### Arquitectura Sprint 1
-### Arquitectura Sprint 2
-### Arquitectura Sprint 3
+* [Arquitectura Sprint 1](Arquitectura)
+* Arquitectura Sprint 2
+* Arquitectura Sprint 3
