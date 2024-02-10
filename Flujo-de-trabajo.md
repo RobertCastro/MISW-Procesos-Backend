@@ -28,13 +28,17 @@
 
 ## URLs ambientes en Heroku
 
-Producción frontend: https://cortaestancia-frontend-grupo23-1a91c70c014c.herokuapp.com/ 
+* Producción frontend: https://cortaestancia-frontend-grupo23-1a91c70c014c.herokuapp.com/ 
 
-Producción backend: https://cortaestancia-backend-grupo23-b0c55df4af13.herokuapp.com/ 
+* Pruebas frontend: https://cortestan-frontendg23-test-257908373cf2.herokuapp.com/
 
-Desarrollo frontend: en proceso de despliegue con el tutor 
+* Desarrollo frontend: https://cortestan-frontendg23-develop-7387de4ff70d.herokuapp.com/
 
-Desarrollo backend: en proceso de despliegue con el tutor 
+* Producción backend: https://cortaestancia-backend-grupo23-b0c55df4af13.herokuapp.com/ 
+
+* Pruebas backend:  https://cortestan-backendg23-test-4276b251dbc7.herokuapp.com/
+
+* Desarrollo backend: https://cortestan-backendg23-develop-eac74b50e701.herokuapp.com/
 
 
 
