@@ -23,6 +23,8 @@
 ### Seguimiento y Control
 * [Proyecto de Jira](proyecto-de-jira)
 
+### Estimación de Riesgos
+* [Estimación de Riesgos](riesgos)
 
 #### Sprint 0
 * [Flujo de Trabajo](Flujo-de-trabajo)
