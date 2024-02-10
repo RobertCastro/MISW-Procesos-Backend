@@ -1,7 +1,7 @@
 import datetime
 from unittest.mock import MagicMock
 import pytest
-from app import create_flask_app
+from app_test import create_flask_app
 from modelos import db
 
 
