@@ -2,10 +2,11 @@
 
 ## Datos del Equipo
 
-| **Proyecto** | Mi Corta Estancia | 
-|----------|-----------------------|
-| **Grupo**  | Grupo 23            |
+**Proyecto:** Mi Corta Estancia - 
+**Grupo**: Grupo 23
+
 | **Nombre** | **Rol** |
+|:----------|:-----------------------|
 | Jhon Puentes | Scrum Master
 | Daniel Gamez | Desarrollador
 | Maria Alas | Desarrollador
