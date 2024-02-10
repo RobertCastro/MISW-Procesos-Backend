@@ -14,10 +14,6 @@ from vistas.login import VistaLogIn
 from modelos import db, Usuario
 from vistas.tipo_movimientos import VistaTipoMovimientos
 
-
-app = None
-
-
 def create_flask_app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///admon_reservas.db'
@@ -25,11 +21,12 @@ def create_flask_app():
     app.config['JWT_SECRET_KEY'] = 'frase-secreta'
     app.config['PROPAGATE_EXCEPTIONS'] = True
 
-    app_context = app.app_context()
-    app_context.push()
-    add_urls(app)
+    db.init_app(app)
+
+    # Add CORS support
     CORS(app)
 
+    # Initialize JWT
     jwt = JWTManager(app)
 
     @jwt.user_lookup_loader
@@ -37,10 +34,7 @@ def create_flask_app():
         identity = jwt_data["sub"]
         return Usuario.query.filter_by(id=identity).one_or_none()
 
-    return app
-
-
-def add_urls(app):
+    # Register API endpoints
     api = Api(app)
     api.add_resource(VistaSignIn, '/signin', '/signin/<int:id_usuario>')
     api.add_resource(VistaLogIn, '/login')
@@ -53,9 +47,10 @@ def add_urls(app):
     api.add_resource(VistaBancos, '/bancos')
     api.add_resource(VistaTipoMovimientos, '/tipo-movimientos')
 
+    return app
+
+app = create_flask_app()
 
 if __name__ == '__main__':
-    app = create_flask_app()
-    db.init_app(app)
-    db.create_all()
+    # Only run the app if executed directly
     app.run()
