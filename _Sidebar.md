@@ -27,6 +27,7 @@
 #### Sprint 0
 * [Flujo de Trabajo](Flujo-de-trabajo)
 * [Canvas de equipo](Canvas)
+* [Calculo de Velocidad.xlsx](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/files/14225321/Calculo.de.Velocidad.xlsx)
 * [Estimación Puntos Historia de Usuario Backlog(VIDEO)](Estimación-Puntos-Historia-de-Usuario-Backlog)
 ### Otros
 * [Guía para la organización de la documentación del proyecto](Guía-organización-documentación-proyecto)
