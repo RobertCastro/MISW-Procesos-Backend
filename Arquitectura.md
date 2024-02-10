@@ -1,6 +1,7 @@
 ## Diagrama de modelo de contexto
 
-![Diagrama de modelo de contexto](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/assets/142275813/29701c53-0e84-48b8-aa7a-ff7e09606991)
+![Diagrama de modelo de contexto_2](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/assets/142275813/c86b3e00-ce44-4e1e-b7da-28b8513b1ce1)
+
 
 ## Diagrama de tecnología
 
