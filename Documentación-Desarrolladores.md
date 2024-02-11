@@ -15,3 +15,5 @@ ng serve --configuration=production
 ng serve --configuration=development 
 
 ng serve --configuration=test
+
+estas configuraciones son las q estan configuradas en los ambientes respectivos front end en produccion en heroku.
