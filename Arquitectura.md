@@ -16,4 +16,5 @@
 
 ## Diagrama componente conector 
 
-![Diagrama componente-conector](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/assets/142275813/b5a7bbfc-7ae5-4d6d-8adb-2ec7e3936788)
+
+![Diagrama componente-conector](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/assets/142275813/b1a7e405-b803-41aa-a5d1-b8fda2280b26)
