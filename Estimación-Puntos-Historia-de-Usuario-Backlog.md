@@ -2,7 +2,7 @@
 Para la estimación de los puntos de historia de usuario utilizamos el archivo de cálculo de velocidad:
 
  
-[Calculo de Velocidad.xlsx](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/files/14225321/Calculo.de.Velocidad.xlsx)
+[Calculo de Velocidad.xlsx](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/files/14232508/Calculo.de.Velocidad.xlsx)
 
 y la técnica de Planning Poker:
 
