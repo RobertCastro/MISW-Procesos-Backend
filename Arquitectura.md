@@ -13,3 +13,7 @@
 ## Diagrama de modelo de contexto
 
 ![modelo_contexto drawio](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/assets/142242801/25a18871-77f8-485f-ae33-b74a98ac5a91)
+
+## Diagrama componente conector 
+
+![Diagrama componente-conector](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/assets/142275813/b5a7bbfc-7ae5-4d6d-8adb-2ec7e3936788)
