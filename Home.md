@@ -53,10 +53,10 @@ PA-7 | Ajustar campos en ver movimientos | Como usuario del sistema quiero poder
 
 ID | C1
 -- | --
-Tipo |
-Cambio | 
-Impacto | 
-Decisión | 
+Tipo | Documentación
+Cambio | Actualizar los documentos de arquitectura según los nuevos requerimientos
+Impacto | Ajuste de los diagramas de arquitectura para eventualmente ajustar el código con base a este nuevo diseño
+Decisión | Se ajusto el diagrama de clases con nuevas propiedades y clases y el diagrama de flujos de interfaces con las nuevas pantallas
 
 </details>
 
