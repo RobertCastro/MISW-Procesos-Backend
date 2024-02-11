@@ -1,0 +1,48 @@
+name: Build test and merge to main
+
+on:
+  push:
+    branches:
+      - 'release'
+  pull_request:
+    branches:
+      - 'release'
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run tests
+      run: pytest
+
+  merge_to_main:
+    needs: build_and_test
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Extract branch name
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_ENV
+
+      - uses: actions/checkout@master
+
+      - name: Merge ${{ env.BRANCH_NAME }} -> main
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          target_branch: main
+          message: Merge ${{ env.BRANCH_NAME }} into main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
