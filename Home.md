@@ -7,8 +7,8 @@
 
 | **Nombre** | **Rol** |
 |:----------|:-----------------------|
-| Jhon Puentes | Scrum Master
-| Daniel Gamez | Desarrollador
+| Jhon Puentes | Scrum Master/Desarrollador
+| Daniel Gamez | Representante Product Owner/Desarrollador
 | Maria Alas | Desarrollador
 | Robert Castro | Desarrollador / Devops
 
