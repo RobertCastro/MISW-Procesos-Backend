@@ -1,5 +1,9 @@
 ## Diagrama de modelo de clases
 
+Documento: 
+[Documento-de-ArquitecturaGupo23 - Sprint 1.docx](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/files/14234565/Documento-de-ArquitecturaGupo23.-.Sprint.1.docx)
+
+
 ![Diagrama de modelo de contexto_final drawio](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/assets/142242801/16b7bb88-c790-4920-93c9-12db8801107b)
 
 ## Diagrama de tecnología
