@@ -15,6 +15,7 @@
 * [Backlog Historias de Usuario](proyecto-de-jira)
 
 ### Arquitectura del Sistema
+* [Arquitectura Inicial](Arquitectura-inicial)
 * [Arquitectura Sprint 1](Arquitectura)
 
 ### Documentación para Usuarios
