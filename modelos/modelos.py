@@ -15,6 +15,11 @@ class Rol(enum.Enum):
     ADMINISTRADOR = 'ADMINISTRADOR'
     PROPIETARIO = 'PROPIETARIO'
 
+class TipoId(enum.Enum):
+    CEDULA = 'CEDULA'
+    PASAPORTE = 'PASAPORTE'
+    LICENCIA = 'LICENCIA'
+
 class Banco(enum.Enum):
     BANCO_BBVA                      = 'BANCO_BBVA'
     BANCAMIA                        = 'BANCAMIA'
