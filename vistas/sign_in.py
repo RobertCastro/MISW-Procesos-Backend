@@ -11,8 +11,12 @@ usuario_schema = UsuarioSchema()
 class VistaSignIn(Resource):
 
     def post(self):
-        nuevo_usuario = Usuario(usuario=request.json["usuario"], contrasena=request.json["contrasena"])
+        nuevo_usuario = Usuario(usuario=request.json["usuario"], contrasena=request.json["contrasena"],rol=request.json["rol"])
         db.session.add(nuevo_usuario)
+        
+        if  request.json["rol"] == "":
+            return {"mensaje": "El rol no puede ser vacio"}, 400
+        
         try:
             db.session.commit()
         except exc.IntegrityError:
