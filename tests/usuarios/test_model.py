@@ -17,6 +17,21 @@ class TestCreateUser(TestCase):
         users_in_db = Usuario.query.all()
         self.assertEqual(len(users_in_db), 1)
 
+    def test_usuario_propietario_es_creado_en_db(self):
+        new_user = Usuario(usuario='test_user', contrasena='123456',rol='PROPIETARIO',
+                           nombre='Daniel',
+                           apellidos='Gamez Salcedo',
+                           celular='3002336655',
+                           correo='correo_test@gmail.com',
+                           tipo_id='CEDULA',
+                           identificacion='123456789',
+                           )
+        db.session.add(new_user)
+        db.session.commit()
+
+        users_in_db = Usuario.query.all()
+        self.assertEqual(len(users_in_db), 1)
+    
     def test_usuario_esperado_es_creado(self):
         new_user = Usuario(usuario='test_user', contrasena='123456',rol='ADMINISTRADOR')
         db.session.add(new_user)
