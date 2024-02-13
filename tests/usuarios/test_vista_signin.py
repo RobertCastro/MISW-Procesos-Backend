@@ -10,7 +10,8 @@ class TestCrearUsuario:
         self.data_factory = Faker()
         self.datos_nuevo_usuario = {
             'usuario': self.data_factory.name(),
-            'contrasena': self.data_factory.word()
+            'contrasena': self.data_factory.word(),
+            'rol': 'ADMINISTRADOR'
         }
 
     def teardown_method(self):
@@ -26,7 +27,7 @@ class TestCrearUsuario:
         assert self.respuesta.status_code == 201
 
     def test_crear_usuario_mismo_usuario_retorna_400(self, client):
-        usuario = Usuario(usuario='usuario_test', contrasena='123456')
+        usuario = Usuario(usuario='usuario_test', contrasena='123456', rol='ADMINISTRADOR')
         db.session.add(usuario)
         db.session.commit()
 
@@ -34,6 +35,12 @@ class TestCrearUsuario:
         self.actuar(self.datos_nuevo_usuario, client)
         assert self.respuesta.status_code == 400
 
+    def test_crear_usuario_rol_vacio_retorna_400(self, client):
+        self.datos_nuevo_usuario.update({'rol': ''})
+        print(self.datos_nuevo_usuario)
+        self.actuar(self.datos_nuevo_usuario, client)
+        assert self.respuesta.status_code == 400
+    
     def test_retorna_campos_esperados(self, client):
         self.actuar(self.datos_nuevo_usuario, client)
         assert 'token' in self.respuesta_json
