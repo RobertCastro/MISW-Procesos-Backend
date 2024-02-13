@@ -106,7 +106,7 @@ class Usuario(db.Model):
     usuario = db.Column(db.String(50), nullable=False)
     contrasena = db.Column(db.String(50), nullable=False)
     propiedades = db.relationship('Propiedad', cascade='all, delete, delete-orphan')
-
+    rol = db.Column(db.String(50))
 
 class ReservaSchema(SQLAlchemyAutoSchema):
     class Meta:
