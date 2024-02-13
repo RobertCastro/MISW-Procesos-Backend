@@ -11,6 +11,9 @@ class TipoMovimiento(enum.Enum):
     INGRESO = 'INGRESO'
     EGRESO = 'EGRESO'
 
+class Rol(enum.Enum):
+    ADMINISTRADOR = 'ADMINISTRADOR'
+    PROPIETARIO = 'PROPIETARIO'
 
 class Banco(enum.Enum):
     BANCO_BBVA                      = 'BANCO_BBVA'
