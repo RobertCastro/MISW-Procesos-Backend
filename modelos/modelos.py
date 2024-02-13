@@ -106,7 +106,14 @@ class Usuario(db.Model):
     usuario = db.Column(db.String(50), nullable=False)
     contrasena = db.Column(db.String(50), nullable=False)
     propiedades = db.relationship('Propiedad', cascade='all, delete, delete-orphan')
+    ##TODO: Revisar campos nuevos
     rol = db.Column(db.String(50))
+    nombre = db.Column(db.String(50))
+    apellidos = db.Column(db.String(50))
+    celular = db.Column(db.Integer)
+    correo = db.Column(db.String(50))
+    tipo_id = db.Column(db.String(50))
+    identificacion = db.Column(db.Integer)
 
 class ReservaSchema(SQLAlchemyAutoSchema):
     class Meta:
