@@ -11,17 +11,62 @@ usuario_schema = UsuarioSchema()
 class VistaSignIn(Resource):
 
     def post(self):
-        nuevo_usuario = Usuario(usuario=request.json["usuario"], contrasena=request.json["contrasena"],rol=request.json["rol"])
-        db.session.add(nuevo_usuario)
-        
-        if  request.json["rol"] == "":
+
+        rol = str(request.json["rol"])
+
+        if rol == "":
             return {"mensaje": "El rol no puede ser vacio"}, 400
+        
+        if request.json["usuario"] == "":
+            return {"mensaje": "El usuario no puede ser vacio"}, 400
+        
+        if request.json["contrasena"] == "":
+            return {"mensaje": "La contrasena no puede ser vacia"}, 400
+        
+        if rol == "PROPIETARIO":
+            if request.json["nombre"] == "":
+                return {"mensaje": "El nombre no puede ser vacio"}, 400
+            
+            if request.json["apellidos"] == "":
+                return {"mensaje": "Los apellidos no pueden ser vacios"}, 400
+            
+            if request.json["tipoIdentificacion"] == "":
+                return {"mensaje": "El tipo de identificacion no puede ser vacio"}, 400
+            
+            if request.json["correo"] == "":
+                return {"mensaje": "El correo no puede ser vacio"}, 400
+            
+            if request.json["celular"] == "":
+                return {"mensaje": "El celular no puede ser vacio"}, 400
+
+        nuevo_usuario = None
+
+        if rol == "PROPIETARIO":
+            nuevo_usuario = Usuario(
+                usuario=request.json["usuario"], 
+                contrasena=request.json["contrasena"],
+                rol=request.json["rol"],
+                nombre=request.json["nombre"],
+                apellidos=request.json["apellidos"],
+                tipo_id=request.json["tipoIdentificacion"],
+                identificacion=request.json["identificacion"],
+                correo=request.json["correo"],
+                celular=request.json["celular"])
+            
+        if rol == "ADMINISTRADOR":
+            nuevo_usuario = Usuario(
+                usuario=request.json["usuario"], 
+                contrasena=request.json["contrasena"],
+                rol=request.json["rol"])
+
+        db.session.add(nuevo_usuario)
         
         try:
             db.session.commit()
         except exc.IntegrityError:
             db.session.rollback()
             return {"mensaje": "Ya existe un usuario con este identificador"}, 400
+        
         token_de_acceso = create_access_token(identity=nuevo_usuario.id)
         return {"mensaje": "usuario creado", "token": token_de_acceso, "id": nuevo_usuario.id}, 201
 
