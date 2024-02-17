@@ -122,6 +122,11 @@ class TestCrearUsuario:
         self.datos_nuevo_usuario_propietario.update({'nombre': 'a'*51})
         self.actuar(self.datos_nuevo_usuario_propietario, client)
         assert self.respuesta.status_code == 400
+
+    def test_crear_usuario_propietario_apellidos_51_caracteres_retorna_400(self, client):
+        self.datos_nuevo_usuario_propietario.update({'apellidos': 'a'*51})
+        self.actuar(self.datos_nuevo_usuario_propietario, client)
+        assert self.respuesta.status_code == 400
         
 class TestActualizarUsuario:
     
