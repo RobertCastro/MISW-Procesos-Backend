@@ -146,3 +146,6 @@ cython_debug/
 #DataBase
 test.db
 admon_reservas_test.db
+
+#Visual Studio
+.code-workspace
