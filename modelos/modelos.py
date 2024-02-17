@@ -11,7 +11,7 @@ class TipoMovimiento(enum.Enum):
     INGRESO = 'INGRESO'
     EGRESO = 'EGRESO'
 
-class Rol(enum.Enum):
+class TipoRol(enum.Enum):
     ADMINISTRADOR = 'ADMINISTRADOR'
     PROPIETARIO = 'PROPIETARIO'
 
@@ -114,13 +114,12 @@ class Usuario(db.Model):
     usuario = db.Column(db.String(50), nullable=False)
     contrasena = db.Column(db.String(50), nullable=False)
     propiedades = db.relationship('Propiedad', cascade='all, delete, delete-orphan')
-    ##TODO: Revisar campos nuevos
-    rol = db.Column(db.String(50))
+    rol = db.Column(db.Enum(TipoRol))
     nombre = db.Column(db.String(50))
     apellidos = db.Column(db.String(50))
     celular = db.Column(db.Integer)
     correo = db.Column(db.String(50))
-    tipo_id = db.Column(db.String(50))
+    tipo_id = db.Column(db.Enum(TipoId))
     identificacion = db.Column(db.Integer)
 
 class ReservaSchema(SQLAlchemyAutoSchema):
