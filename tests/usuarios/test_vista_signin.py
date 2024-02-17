@@ -78,7 +78,42 @@ class TestCrearUsuario:
         assert usuario_db[0].tipo_id.name == self.datos_nuevo_usuario_propietario['tipoIdentificacion']
         assert usuario_db[0].identificacion == self.datos_nuevo_usuario_propietario['identificacion']
 
+    def test_crear_usuario_propietario_nombre_vacio_retorna_400(self, client):
+        self.datos_nuevo_usuario_propietario.update({'nombre': ''})
+        self.actuar(self.datos_nuevo_usuario_propietario, client)
+        assert self.respuesta.status_code == 400
+    
+    def test_crear_usuario_propietario_apellidos_vacio_retorna_400(self, client):
+        self.datos_nuevo_usuario_propietario.update({'apellidos': ''})
+        self.actuar(self.datos_nuevo_usuario_propietario, client)
+        assert self.respuesta.status_code == 400
 
+    def test_crear_usuario_propietario_tipo_identificacion_vacio_retorna_400(self, client):
+        self.datos_nuevo_usuario_propietario.update({'tipoIdentificacion': ''})
+        self.actuar(self.datos_nuevo_usuario_propietario, client)
+        assert self.respuesta.status_code == 400
+
+    def test_crear_usuario_propietario_correo_vacio_retorna_400(self, client):
+        self.datos_nuevo_usuario_propietario.update({'correo': ''})
+        self.actuar(self.datos_nuevo_usuario_propietario, client)
+        assert self.respuesta.status_code == 400
+
+    def test_crear_usuario_propietario_celular_vacio_retorna_400(self, client):
+        self.datos_nuevo_usuario_propietario.update({'celular': ''})
+        self.actuar(self.datos_nuevo_usuario_propietario, client)
+        assert self.respuesta.status_code == 400
+
+    def test_crear_usuario_propietario_tipo_identificacion_vacio_retorna_400(self, client):
+        self.datos_nuevo_usuario_propietario.update({'tipoIdentificacion': ''})
+        self.actuar(self.datos_nuevo_usuario_propietario, client)
+        assert self.respuesta.status_code == 400
+
+    def test_crear_usuario_propietario_identificacion_vacio_retorna_400(self, client):
+        self.datos_nuevo_usuario_propietario.update({'identificacion': ''})
+        self.actuar(self.datos_nuevo_usuario_propietario, client)
+        assert self.respuesta.status_code == 400
+
+    
 class TestActualizarUsuario:
     
     def setup_method(self):
