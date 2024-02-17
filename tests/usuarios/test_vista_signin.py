@@ -14,6 +14,18 @@ class TestCrearUsuario:
             'rol': 'ADMINISTRADOR'
         }
 
+        self.datos_nuevo_usuario_propietario = {
+            'usuario': self.data_factory.name(),
+            'contrasena': self.data_factory.word(),
+            'rol': 'PROPIETARIO',
+            'nombre': self.data_factory.name(),
+            'apellidos': self.data_factory.name(),
+            'celular': self.data_factory.phone_number(),
+            'correo': self.data_factory.email(),
+            'tipoIdentificacion': 'CEDULA',
+            'identificacion': self.data_factory.random_number()
+        }
+
     def teardown_method(self):
         db.session.rollback()
         Usuario.query.delete()
@@ -51,6 +63,20 @@ class TestCrearUsuario:
         self.actuar(self.datos_nuevo_usuario, client)
         usuario_db = Usuario.query.filter(Usuario.usuario == self.datos_nuevo_usuario['usuario']).all()
         assert len(usuario_db) == 1
+
+    def test_crear_usuario_propietario(self, client):
+        self.actuar(self.datos_nuevo_usuario_propietario, client)
+        assert self.respuesta.status_code == 201
+
+        usuario_db = Usuario.query.filter(Usuario.usuario == self.datos_nuevo_usuario_propietario['usuario']).all()
+        assert len(usuario_db) == 1
+        
+        assert usuario_db[0].nombre == self.datos_nuevo_usuario_propietario['nombre']
+        assert usuario_db[0].apellidos == self.datos_nuevo_usuario_propietario['apellidos']
+        assert usuario_db[0].celular == self.datos_nuevo_usuario_propietario['celular']
+        assert usuario_db[0].correo == self.datos_nuevo_usuario_propietario['correo']
+        assert usuario_db[0].tipo_id.name == self.datos_nuevo_usuario_propietario['tipoIdentificacion']
+        assert usuario_db[0].identificacion == self.datos_nuevo_usuario_propietario['identificacion']
 
 
 class TestActualizarUsuario:
