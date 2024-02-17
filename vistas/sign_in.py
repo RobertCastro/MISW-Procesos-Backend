@@ -47,6 +47,9 @@ class VistaSignIn(Resource):
             
             if len(request.json["nombre"]) > 50:
                 return {"mensaje": "El nombre debe tener maximo 50 caracteres"}, 400
+            
+            if len(request.json["apellidos"]) > 50:
+                return {"mensaje": "Los apellidos deben tener maximo 50 caracteres"}, 400
 
         nuevo_usuario = None
 
