@@ -38,6 +38,9 @@ class VistaSignIn(Resource):
             
             if request.json["celular"] == "":
                 return {"mensaje": "El celular no puede ser vacio"}, 400
+            
+            if request.json["identificacion"] == "":
+                return {"mensaje": "La identificacion no puede ser vacia"}, 400
 
         nuevo_usuario = None
 
