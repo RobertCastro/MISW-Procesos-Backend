@@ -23,6 +23,9 @@ class VistaSignIn(Resource):
         if request.json["contrasena"] == "":
             return {"mensaje": "La contrasena no puede ser vacia"}, 400
         
+        if len(request.json["usuario"]) > 50:
+            return {"mensaje": "El usuario debe tener maximo 50 caracteres"}, 400
+
         if rol == "PROPIETARIO":
             if request.json["nombre"] == "":
                 return {"mensaje": "El nombre no puede ser vacio"}, 400
