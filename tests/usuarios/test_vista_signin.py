@@ -76,7 +76,7 @@ class TestCrearUsuario:
         assert usuario_db[0].celular == self.datos_nuevo_usuario_propietario['celular']
         assert usuario_db[0].correo == self.datos_nuevo_usuario_propietario['correo']
         assert usuario_db[0].tipo_id.name == self.datos_nuevo_usuario_propietario['tipoIdentificacion']
-        assert usuario_db[0].identificacion == self.datos_nuevo_usuario_propietario['identificacion']
+        assert str(usuario_db[0].identificacion) == str(self.datos_nuevo_usuario_propietario['identificacion'])
 
     def test_crear_usuario_propietario_nombre_vacio_retorna_400(self, client):
         self.datos_nuevo_usuario_propietario.update({'nombre': ''})
