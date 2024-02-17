@@ -44,6 +44,9 @@ class VistaSignIn(Resource):
             
             if request.json["identificacion"] == "":
                 return {"mensaje": "La identificacion no puede ser vacia"}, 400
+            
+            if len(request.json["nombre"]) > 50:
+                return {"mensaje": "El nombre debe tener maximo 50 caracteres"}, 400
 
         nuevo_usuario = None
 
