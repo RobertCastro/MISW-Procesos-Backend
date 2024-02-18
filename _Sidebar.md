@@ -23,6 +23,7 @@
 
 ### Seguimiento y Control
 * [Proyecto de Jira](proyecto-de-jira)
+* [Grabaciones reuniones seguimiento "diarias" Equipo](grabaciones-reuniones-diarias)
 
 ### Estimación de Riesgos
 * [Estimación de Riesgos](Estimación-de-Riesgos)
