@@ -1,4 +1,3 @@
-# Grabación reuniones diarias de seguimiento
 
 La idea es realizar dos reuniones de equipo por semana para similar las reuniones "diarias" de la metodología scrum. A continuación, la grabación de las reuniones realizadas. Debe estar logeado con su usuario de Universidad de los Andes para ver los videos en sharepoint:
 
