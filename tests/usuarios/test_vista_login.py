@@ -1,11 +1,11 @@
 import json
-from modelos import Usuario, db
+from modelos import Usuario, db, TipoRol
 
 
 class TestVistaLogin:
 
     def setup_method(self):
-        usuario = Usuario(usuario='test_user', contrasena='123456')
+        usuario = Usuario(usuario='test_user', contrasena='123456', rol=TipoRol.ADMINISTRADOR)
         db.session.add(usuario)
         db.session.commit()
 
