@@ -12,4 +12,4 @@ class VistaLogIn(Resource):
         if usuario is None:
             return "Verifique los datos ingresados", 404
         token_de_acceso = create_access_token(identity=usuario.id)
-        return {"mensaje": "Inicio de sesion exitoso", "token": token_de_acceso}
+        return {"mensaje": "Inicio de sesion exitoso", "token": token_de_acceso,"rol":usuario.rol.value}
