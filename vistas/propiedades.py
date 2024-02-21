@@ -27,5 +27,9 @@ class VistaPropiedades(Resource):
     
     @jwt_required()
     def get(self):
-        propiedades = Propiedad.query.filter(Propiedad.id_usuario == current_user.id)
+        if current_user.rol.value == 'ADMINISTRADOR':
+            propiedades = Propiedad.query.all()
+        else:
+            propiedades = Propiedad.query.filter(Propiedad.id_usuario == current_user.id)
+        print(propiedad_schema.dump(propiedades, many=True))    
         return propiedad_schema.dump(propiedades, many=True)
