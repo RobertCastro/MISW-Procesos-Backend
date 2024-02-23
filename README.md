@@ -32,7 +32,7 @@ o
 sudo pip3 install -r requirements.txt
 ```
 
-## Instalar flask manualmente
+## Instalar flask y sus dependencias manualmente
 Puede ser que no se haya instalado las libs de flask y sqlalchemy de forma automatica. Para solucionar esto ejecute:
 
 ```bash
