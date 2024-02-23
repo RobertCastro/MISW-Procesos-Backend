@@ -44,7 +44,7 @@ sudo pip3 install sqlalchemy
 sudo pip3 install flask_sqlalchemy
 sudo pip3 install marshmallow
 sudo pip3 install marshmallow_sqlalchemy
-```bash
+```
 
 ## Iniciar la aplicación
 Para iniciar la aplicación ejecute:
