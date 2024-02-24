@@ -73,7 +73,7 @@ class TestCrearUsuario:
         
         assert usuario_db[0].nombre == self.datos_nuevo_usuario_propietario['nombre']
         assert usuario_db[0].apellidos == self.datos_nuevo_usuario_propietario['apellidos']
-        assert usuario_db[0].celular == self.datos_nuevo_usuario_propietario['celular']
+        assert str(usuario_db[0].celular) == str(self.datos_nuevo_usuario_propietario['celular'])
         assert usuario_db[0].correo == self.datos_nuevo_usuario_propietario['correo']
         assert usuario_db[0].tipo_id.name == self.datos_nuevo_usuario_propietario['tipoIdentificacion']
         assert str(usuario_db[0].identificacion) == str(self.datos_nuevo_usuario_propietario['identificacion'])

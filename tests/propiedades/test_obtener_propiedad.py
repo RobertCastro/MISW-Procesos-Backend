@@ -5,10 +5,12 @@ from modelos import Usuario, Propiedad, Banco, db, PropiedadSchema
 class TestObtenerPropiedad:
 
     def setup_method(self):
-        self.usuario_1 = Usuario(usuario='usuario_1', contrasena='123456')
-        self.usuario_2 = Usuario(usuario='usuario_2', contrasena='123456')
+        self.usuario_1 = Usuario(usuario='usuario_1', contrasena='123456',rol='PROPIETARIO')
+        self.usuario_2 = Usuario(usuario='usuario_2', contrasena='123456',rol='PROPIETARIO')
+        self.usuario_3 = Usuario(usuario='usuario_3', contrasena='123456',rol='ADMINISTRADOR')
         db.session.add(self.usuario_1)
         db.session.add(self.usuario_2)
+        db.session.add(self.usuario_3)
         db.session.commit()
 
         self.propiedad_1_usu_1 = Propiedad(nombre_propiedad='propiedad cerca a la quebrada', ciudad='Boyaca', municipio='Paipa',
@@ -53,3 +55,8 @@ class TestObtenerPropiedad:
     def test_retorna_401_no_token(self, client):
         self.actuar(self.propiedad_1_usu_1.id, client)
         assert self.respuesta.status_code == 401
+
+    def test_si_usuario_admin_retorno_200_al_obtener_propiedad(self, client):
+        token_usuario_3 = create_access_token(identity=self.usuario_3.id) 
+        self.actuar(self.propiedad_1_usu_1.id, client, token_usuario_3)
+        assert self.respuesta.status_code == 200
