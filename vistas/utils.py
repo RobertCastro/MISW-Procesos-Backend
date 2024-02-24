@@ -47,7 +47,14 @@ class ResultadoBuscarMovimiento:
 
 def buscar_movimiento(id_movimiento: int, id_usuario: int) -> ResultadoBuscarMovimiento:
         buscar_movimiento = ResultadoBuscarMovimiento()
-        movimiento = db.session.query(Movimiento).join(Propiedad).filter(Propiedad.id_usuario == id_usuario, Movimiento.id == id_movimiento).one_or_none()
+        rol = db.session.query(Usuario.rol).filter(Usuario.id == id_usuario).one_or_none()
+        movimiento=None
+        if rol[0].value == 'PROPIETARIO':
+            movimiento = db.session.query(Movimiento).join(Propiedad).filter(Propiedad.id_usuario == id_usuario, Movimiento.id == id_movimiento).one_or_none()
+        
+        if rol[0].value == 'ADMINISTRADOR':
+            movimiento = Movimiento.query.filter(Movimiento.id==id_movimiento).one_or_none()
+
         if not movimiento:
             buscar_movimiento.error = {'mensaje': 'movimiento no encontrado'}, 404
         buscar_movimiento.movimiento = movimiento
