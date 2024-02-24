@@ -33,6 +33,13 @@ class VistaMovimientos(Resource):
         resultado_buscar_propiedad = buscar_propiedad(id_propiedad, current_user.id)
         if resultado_buscar_propiedad.error:
            return resultado_buscar_propiedad.error
-        movimientos = db.session.query(Movimiento).join(Propiedad).filter(Propiedad.id_usuario == current_user.id, Propiedad.id == id_propiedad).all()
+        
+        rol=current_user.rol
+        movimientos=None
+
+        if rol.value =='ADMINISTRADOR':
+            movimientos = db.session.query(Movimiento).filter(Movimiento.id_propiedad == id_propiedad).all()
+        else:
+            movimientos = db.session.query(Movimiento).join(Propiedad).filter(Propiedad.id_usuario == current_user.id, Propiedad.id == id_propiedad).all()
         return movimiento_schema.dump(movimientos, many=True)
     
