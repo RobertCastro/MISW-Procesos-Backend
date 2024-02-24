@@ -1,6 +1,6 @@
 import json
-from modelos import Usuario, db,TipoRol
-
+from modelos import Usuario, db, TipoRol
+from flask_jwt_extended import create_access_token, decode_token
 
 class TestVistaLogin:
 
@@ -26,6 +26,12 @@ class TestVistaLogin:
     def test_retorna_token_si_login_exitoso(self, client):
         self.actuar(client, self.datos_usuario)
         assert 'token' in self.respuesta_json.keys()
+
+    def test_retorna_rol_si_login_exitoso(self, client):
+        self.actuar(client, self.datos_usuario)
+        access_token = self.respuesta_json['token']
+        decoded_token = decode_token(access_token)
+        assert decoded_token['rol'] == "ADMINISTRADOR"
 
     def test_retorna_404_si_login_fallido_usuario(self, client):
         self.datos_usuario.update({'usuario': 'usuario_no_existe'})

@@ -11,5 +11,10 @@ class VistaLogIn(Resource):
                                        Usuario.contrasena == request.json["contrasena"]).first()
         if usuario is None:
             return "Verifique los datos ingresados", 404
-        token_de_acceso = create_access_token(identity=usuario.id)
+        
+        additional_claims = {
+            "rol": usuario.rol.name
+        }
+        
+        token_de_acceso = create_access_token(identity=usuario.id, additional_claims=additional_claims)
         return {"mensaje": "Inicio de sesion exitoso", "token": token_de_acceso,"rol":usuario.rol.value}
