@@ -7,7 +7,7 @@ from modelos import Banco, Usuario, Propiedad, db
 class TestCrearPropiedad:
 
     def setup_method(self):
-        self.usuario = Usuario(usuario='test_user', contrasena='123456')
+        self.usuario = Usuario(usuario='test_user', contrasena='123456',rol='ADMINISTRADOR')
         db.session.add(self.usuario)
         db.session.commit()
         self.usuario_token = create_access_token(identity=self.usuario.id)
