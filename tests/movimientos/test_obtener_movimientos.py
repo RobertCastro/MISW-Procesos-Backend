@@ -8,8 +8,11 @@ class TestObtenerMovimientos:
     def setup_method(self):
         self.usuario_1 = Usuario(usuario='usuario_1', contrasena='123456',rol='PROPIETARIO')
         self.usuario_2 = Usuario(usuario='usuario_2', contrasena='123456',rol='PROPIETARIO')
+        self.usuario_3 = Usuario(usuario='usuario_3', contrasena='123456',rol='ADMINISTRADOR')
+        
         db.session.add(self.usuario_1)
         db.session.add(self.usuario_2)
+        db.session.add(self.usuario_3)
         db.session.commit()
 
         self.propiedad_1_usu_1 = Propiedad(nombre_propiedad='propiedad cerca a la quebrada', ciudad='Boyaca', municipio='Paipa',
@@ -81,3 +84,11 @@ class TestObtenerMovimientos:
     def test_retorna_401_token_no_enviado(self, client):
         self.actuar(client, 123)
         assert self.respuesta.status_code == 401
+
+    def test_retorna_200_si_propiedad_consulta_administrador(self, client):
+        token_usuario_3 = create_access_token(identity=self.usuario_3.id)
+        self.actuar(client, self.propiedad_1_usu_1.id, token_usuario_3)
+        assert self.respuesta.status_code == 200
+        assert len(self.respuesta_json) >= 1
+        
+

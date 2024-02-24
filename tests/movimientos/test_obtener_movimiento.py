@@ -80,3 +80,9 @@ class TestObtenerMovimiento:
         token_usuario_3 = create_access_token(identity=self.usuario_3.id)
         self.actuar(client, self.movimiento_reserva.id, token_usuario_3)
         assert self.respuesta.status_code == 200
+        #test the response is correct
+        assert self.respuesta_json['id'] == self.movimiento_reserva.id
+        assert self.respuesta_json['fecha'] == self.movimiento_reserva.fecha.strftime('%Y-%m-%dT%H:%M:%S')
+        assert self.respuesta_json['valor'] == self.movimiento_reserva.valor
+        assert self.respuesta_json['concepto'] == self.movimiento_reserva.concepto
+        assert self.respuesta_json['tipo_movimiento'] == self.movimiento_reserva.tipo_movimiento.value
