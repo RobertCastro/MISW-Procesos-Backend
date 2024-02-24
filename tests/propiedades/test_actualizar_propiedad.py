@@ -9,8 +9,10 @@ class TestActualizarPropiedad:
     def setup_method(self):
         self.usuario_1 = Usuario(usuario='usuario_1', contrasena='123456',rol='PROPIETARIO')
         self.usuario_2 = Usuario(usuario='usuario_2', contrasena='123456',rol='PROPIETARIO')
+        self.usuario_3 = Usuario(usuario='usuario_3', contrasena='123456',rol='ADMINISTRADOR')
         db.session.add(self.usuario_1)
         db.session.add(self.usuario_2)
+        db.session.add(self.usuario_3)
         db.session.commit()
 
         self.propiedad_1_usu_1 = Propiedad(nombre_propiedad='propiedad cerca a la quebrada', ciudad='Boyaca', municipio='Paipa',
@@ -31,7 +33,7 @@ class TestActualizarPropiedad:
         self.respuesta_json = self.respuesta.json
 
     def test_retorna_200_al_actualizar_propiedad(self, client):
-        token_usuario_1 = create_access_token(identity=self.usuario_1.id) 
+        token_usuario_3 = create_access_token(identity=self.usuario_3.id) 
         self.actuar(
             {
                 'nombre_propiedad': 'nombre actualizado',
@@ -39,7 +41,7 @@ class TestActualizarPropiedad:
             },
             self.propiedad_1_usu_1.id,
             client,
-            token_usuario_1
+            token_usuario_3
         )
         assert self.respuesta.status_code == 200
 
@@ -71,8 +73,8 @@ class TestActualizarPropiedad:
         assert propiedad_db.ciudad == 'Boyaca'
         assert propiedad_db.municipio == 'Paipa'
 
-    def test_retorna_404_si_propiedad_no_es_del_usuario(self, client):
-        token_usuario_2 = create_access_token(identity=self.usuario_2.id) 
+    def test_retorna_404_si_usuario_no_administrador(self, client):
+        token_usuario_1 = create_access_token(identity=self.usuario_1.id) 
         self.actuar(
             {
                 'nombre_propiedad': 'nombre actualizado',
@@ -80,7 +82,7 @@ class TestActualizarPropiedad:
             },
             self.propiedad_1_usu_1.id,
             client,
-            token_usuario_2
+            token_usuario_1
         )
         assert self.respuesta.status_code == 404
-        assert self.respuesta_json == {"mensaje": "propiedad no encontrada"}
+        assert self.respuesta_json == {"mensaje": "usuario no es administrador no puede editar propiedad"}
