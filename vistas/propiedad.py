@@ -20,6 +20,10 @@ class VistaPropiedad(Resource):
     
     @jwt_required()
     def delete(self, id_propiedad):
+        rol = current_user.rol.value
+        if rol != 'ADMINISTRADOR':
+            return "El usuario no es administrador no debe poder eliminar propiedades", 400
+        
         resultado_buscar_propiedad = buscar_propiedad(id_propiedad, current_user.id)
         if resultado_buscar_propiedad.error:
             return resultado_buscar_propiedad.error

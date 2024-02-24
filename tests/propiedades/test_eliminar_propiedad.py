@@ -37,18 +37,13 @@ class TestEliminarPropiedad:
     def test_eliminar_propiedad_propietario_retorna_400(self, client):
         token_usuario_1 = create_access_token(identity=self.usuario_1.id)
         self.actuar(self.propiedad_1_usu_1.id, client, token_usuario_1)
-        assert self.respuesta.status_code == 400
+        assert self.respuesta.status_code == 400  
 
     def test_eliminar_propiedad_elimina_registro_db(self, client):
-        token_usuario_1 = create_access_token(identity=self.usuario_1.id)
-        self.actuar(self.propiedad_1_usu_1.id, client, token_usuario_1)
+        token_usuario_3 = create_access_token(identity=self.usuario_3.id)
+        self.actuar(self.propiedad_1_usu_1.id, client, token_usuario_3)
         assert Propiedad.query.filter(Propiedad.id == self.propiedad_1_usu_1.id).first() is None
-
-    def test_eliminar_propiedad_que_no_pertenece_al_usuario_retorna_404(self, client):
-        token_usuario_2 = create_access_token(identity=self.usuario_2.id)
-        self.actuar(self.propiedad_1_usu_1.id, client, token_usuario_2)
-        assert self.respuesta.status_code == 404
-
+        
     def test_eliminar_propiedad_sin_token_retorna_401(self, client):
         self.actuar(self.propiedad_1_usu_1.id, client)
         assert self.respuesta.status_code == 401
