@@ -57,7 +57,7 @@ class TestActualizarPropiedad:
         assert self.respuesta.status_code == 401
 
     def test_actualiza_solo_campos_enviados(self, client):
-        token_usuario_1 = create_access_token(identity=self.usuario_1.id) 
+        token_usuario_3 = create_access_token(identity=self.usuario_3.id) 
         self.actuar(
             {
                 'nombre_propiedad': 'nombre actualizado',
@@ -65,7 +65,7 @@ class TestActualizarPropiedad:
             },
             self.propiedad_1_usu_1.id,
             client,
-            token_usuario_1
+            token_usuario_3
         )
         propiedad_db = Propiedad.query.filter(Propiedad.id == self.propiedad_1_usu_1.id).first()
         assert propiedad_db.nombre_propiedad == 'nombre actualizado'

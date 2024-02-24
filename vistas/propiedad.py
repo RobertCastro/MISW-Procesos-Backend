@@ -10,6 +10,11 @@ class VistaPropiedad(Resource):
 
     @jwt_required()
     def put(self, id_propiedad):
+        rol = current_user.rol.value
+
+        if rol != 'ADMINISTRADOR':
+            return {"mensaje": "usuario no es administrador no puede editar propiedad"}, 404
+
         resultado_buscar_propiedad = buscar_propiedad(id_propiedad, current_user.id)
         if resultado_buscar_propiedad.error:
             return resultado_buscar_propiedad.error
