@@ -63,5 +63,5 @@ Decisión | Se ajusto el diagrama de clases con nuevas propiedades y clases y el
 
 ## Arquitectura
 * [Arquitectura Sprint 1](Arquitectura)
-* Arquitectura Sprint 2
+* [Arquitectura Sprint 2 - No hay cambios](Arquitectura)
 * Arquitectura Sprint 3
