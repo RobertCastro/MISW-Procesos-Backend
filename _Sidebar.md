@@ -33,7 +33,8 @@
 * [Canvas de equipo](Canvas)
 * [Calculo de Velocidad.xlsx](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/files/14232508/Calculo.de.Velocidad.xlsx)
 
-
+#### Sprint 1
+* [Retrospectiva Sprint 1](https://uniandes-my.sharepoint.com/:v:/g/personal/da_gamez96_uniandes_edu_co/Ebvr4_0RurRNsxJ6SBGR0BsBb0vfLRkoPjle33P0-14lZQ)
 
 * [Estimación Puntos Historia de Usuario Backlog(VIDEO)](Estimación-Puntos-Historia-de-Usuario-Backlog)
 ### Otros
