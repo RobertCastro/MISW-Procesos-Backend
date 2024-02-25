@@ -34,7 +34,7 @@
 * [Calculo de Velocidad.xlsx](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/files/14232508/Calculo.de.Velocidad.xlsx)
 * [Estimación Puntos Historia de Usuario Backlog(VIDEO)](Estimación-Puntos-Historia-de-Usuario-Backlog)
 #### Sprint 1
-* [Retrospectiva Sprint 1](https://uniandes-my.sharepoint.com/:v:/g/personal/da_gamez96_uniandes_edu_co/Ebvr4_0RurRNsxJ6SBGR0BsBb0vfLRkoPjle33P0-14lZQ)
+* [Video Retrospectiva Sprint 1](https://uniandes-my.sharepoint.com/:v:/g/personal/da_gamez96_uniandes_edu_co/Ebvr4_0RurRNsxJ6SBGR0BsBb0vfLRkoPjle33P0-14lZQ)
 * [Presentación Retrospectiva Sprint 1](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/files/14396507/Retrospectiva.Sprint.1.Grupo.23.pptx)
 
 
