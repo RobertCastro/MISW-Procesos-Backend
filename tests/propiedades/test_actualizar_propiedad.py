@@ -1,3 +1,4 @@
+# se corre con pytest -k test_actualizar_propiedad.py
 import json
 
 from flask_jwt_extended import create_access_token
@@ -7,8 +8,8 @@ from modelos import Usuario, Propiedad, Banco, db
 class TestActualizarPropiedad:
 
     def setup_method(self):
-        self.usuario_1 = Usuario(usuario='usuario_1', contrasena='123456',rol='PROPIETARIO')
-        self.usuario_2 = Usuario(usuario='usuario_2', contrasena='123456',rol='PROPIETARIO')
+        self.usuario_1 = Usuario(usuario='usuario_1', contrasena='123456',rol='PROPIETARIO',nombre="nombre1",celular='1234567')
+        self.usuario_2 = Usuario(usuario='usuario_2', contrasena='123456',rol='PROPIETARIO',nombre="nombre2",celular='7654321')
         self.usuario_3 = Usuario(usuario='usuario_3', contrasena='123456',rol='ADMINISTRADOR')
         db.session.add(self.usuario_1)
         db.session.add(self.usuario_2)
@@ -16,7 +17,7 @@ class TestActualizarPropiedad:
         db.session.commit()
 
         self.propiedad_1_usu_1 = Propiedad(nombre_propiedad='propiedad cerca a la quebrada', ciudad='Boyaca', municipio='Paipa',
-                              direccion='Vereda Toibita', nombre_propietario='Jorge Loaiza', numero_contacto='1234567', banco=Banco.BANCOLOMBIA,
+                              direccion='Vereda Toibita', nombre_propietario='nombre1', numero_contacto='1234567', banco=Banco.BANCOLOMBIA,
                               numero_cuenta='000033322255599', id_usuario=self.usuario_1.id)
         db.session.add(self.propiedad_1_usu_1)
         db.session.commit()
@@ -86,3 +87,20 @@ class TestActualizarPropiedad:
         )
         assert self.respuesta.status_code == 404
         assert self.respuesta_json == {"mensaje": "usuario no es administrador no puede editar propiedad"}
+
+    def test_actualizar_nombre_propietario_y_contacto(self, client):
+        token_usuario_3 = create_access_token(identity=self.usuario_3.id) 
+        self.actuar(
+            {
+                'nombre_propietario': self.usuario_2.nombre
+            },
+            self.propiedad_1_usu_1.id,
+            client,
+            token_usuario_3
+        )
+        propiedad_db = Propiedad.query.filter(Propiedad.id == self.propiedad_1_usu_1.id).first()
+        
+        assert propiedad_db.nombre_propietario == self.usuario_2.nombre
+
+        #al actualizar el nombre de propietario el metodo debe actualizar automaticamente el contacto
+        assert propiedad_db.numero_contacto == self.usuario_2.celular
