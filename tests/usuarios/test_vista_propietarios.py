@@ -10,10 +10,12 @@ class TestListarPropietarios:
     def setup_method(self):
         self.data_factory = Faker()
         self.datos_usuario_admin = Usuario(usuario='test_admin', contrasena='123456', rol=TipoRol.ADMINISTRADOR.value)
-        self.datos_usuario_propietario = Usuario(usuario='test_propietario', contrasena='123456', rol=TipoRol.PROPIETARIO.value, nombre=self.data_factory.name(), apellidos=self.data_factory.name(), correo=self.data_factory.email(), celular=self.data_factory.phone_number())
+        self.datos_usuario_propietario_1 = Usuario(usuario='test_propietario_1', contrasena='123456', rol=TipoRol.PROPIETARIO.value, nombre=self.data_factory.name(), apellidos=self.data_factory.name(), correo=self.data_factory.email(), celular=self.data_factory.phone_number())
+        self.datos_usuario_propietario_2 = Usuario(usuario='test_propietario_2', contrasena='123456', rol=TipoRol.PROPIETARIO.value, nombre=self.data_factory.name(), apellidos=self.data_factory.name(), correo=self.data_factory.email(), celular=self.data_factory.phone_number())
 
         db.session.add(self.datos_usuario_admin)
-        db.session.add(self.datos_usuario_propietario)
+        db.session.add(self.datos_usuario_propietario_1)
+        db.session.add(self.datos_usuario_propietario_2)
         db.session.commit()
 
     def teardown_method(self):
@@ -32,4 +34,15 @@ class TestListarPropietarios:
         self.actuar(client,token_admin)
         assert self.respuesta.status_code == 200
 
-    
+    def test_listar_propietarios_retorna_lista_de_propietarios(self, client):
+        token_admin= create_access_token(identity=self.datos_usuario_admin.id)
+        self.actuar(client,token_admin)
+        assert len(self.respuesta_json['propietarios_nombres']) == 2
+        assert self.datos_usuario_propietario_1.nombre in self.respuesta_json['propietarios_nombres']
+        assert self.datos_usuario_propietario_2.nombre in self.respuesta_json['propietarios_nombres']
+
+    def test_dar_propietarios_sin_permisos_retorna_400(self, client):
+        token_propietario= create_access_token(identity=self.datos_usuario_propietario_1.id)
+        self.actuar(client,token_propietario)
+        assert self.respuesta.status_code == 400
+        assert self.respuesta_json['mensaje'] == 'No tiene permisos para listar usuarios'
