@@ -117,3 +117,15 @@ class TestActualizarPropiedad:
             token_usuario_3
         )
         assert self.respuesta.status_code == 400
+
+    def test_retorna_400_al_actualizar_propiedad_nombrevacio(self, client):
+        token_usuario_3 = create_access_token(identity=self.usuario_3.id) 
+        self.actuar(
+            {
+                'nombre_propietario': ''
+            },
+            self.propiedad_1_usu_1.id,
+            client,
+            token_usuario_3
+        )
+        assert self.respuesta.status_code == 400
