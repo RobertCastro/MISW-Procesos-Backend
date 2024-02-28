@@ -24,6 +24,11 @@ class VistaPropiedad(Resource):
         nombre_propietario=request.json.get('nombre_propietario')
         
         if nombre_propietario:
+            propietario = Usuario.query.filter(Usuario.nombre == nombre_propietario).first()
+            
+            if not propietario:
+                return {"mensaje": "El nombre de propietario a ingresar no existe en el listado de propietarios"}, 400
+
             celular_propietario = Usuario.query.filter(Usuario.nombre == nombre_propietario).first().celular
             setattr(resultado_buscar_propiedad.propiedad, 'numero_contacto', celular_propietario)
 
