@@ -32,6 +32,9 @@ class VistaPropiedad(Resource):
             celular_propietario = propietario.celular
             setattr(resultado_buscar_propiedad.propiedad, 'numero_contacto', celular_propietario)
 
+        if nombre_propietario == '':
+                return {"mensaje": "El nombre de propietario no puede estar vacío"}, 400
+
         db.session.commit() 
         return propiedad_schema.dump(resultado_buscar_propiedad.propiedad)
     
