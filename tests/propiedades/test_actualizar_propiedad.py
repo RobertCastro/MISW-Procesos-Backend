@@ -39,6 +39,7 @@ class TestActualizarPropiedad:
             {
                 'nombre_propiedad': 'nombre actualizado',
                 'direccion': 'nueva direccion'
+                
             },
             self.propiedad_1_usu_1.id,
             client,
@@ -103,4 +104,4 @@ class TestActualizarPropiedad:
         assert propiedad_db.nombre_propietario == self.usuario_2.nombre
 
         #al actualizar el nombre de propietario el metodo debe actualizar automaticamente el contacto
-        assert propiedad_db.numero_contacto == self.usuario_2.celular
+        assert str(propiedad_db.numero_contacto) == str(self.usuario_2.celular)
