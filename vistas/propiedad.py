@@ -1,7 +1,7 @@
 from flask import request
 from flask_jwt_extended import current_user, jwt_required
 from flask_restful import Resource
-from modelos import Propiedad, PropiedadSchema, db,Usuario
+from modelos import Propiedad, PropiedadSchema, db, Usuario
 from vistas.utils import buscar_propiedad
 
 propiedad_schema = PropiedadSchema()
@@ -21,15 +21,15 @@ class VistaPropiedad(Resource):
         for key, value in request.json.items():
             setattr(resultado_buscar_propiedad.propiedad, key, value)
         
-        nombre_propietario=request.json.get('nombre_propietario')
+        nombre_propietario = request.json.get('nombre_propietario')
         
         if nombre_propietario:
-            propietario = Usuario.query.filter(Usuario.nombre == nombre_propietario).first()
+            propietario = Usuario.query.filter(Usuario.nombre == nombre_propietario, Usuario.rol == 'PROPIETARIO').first()
             
             if not propietario:
                 return {"mensaje": "El nombre de propietario a ingresar no existe en el listado de propietarios"}, 400
 
-            celular_propietario = Usuario.query.filter(Usuario.nombre == nombre_propietario).first().celular
+            celular_propietario = propietario.celular
             setattr(resultado_buscar_propiedad.propiedad, 'numero_contacto', celular_propietario)
 
         db.session.commit() 
