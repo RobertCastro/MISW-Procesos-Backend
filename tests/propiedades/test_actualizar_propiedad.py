@@ -105,3 +105,15 @@ class TestActualizarPropiedad:
 
         #al actualizar el nombre de propietario el metodo debe actualizar automaticamente el contacto
         assert str(propiedad_db.numero_contacto) == str(self.usuario_2.celular)
+
+    def test_retorna_400_al_actualizar_propiedad_nombrepropietario_no_listado(self, client):
+        token_usuario_3 = create_access_token(identity=self.usuario_3.id) 
+        self.actuar(
+            {
+                'nombre_propietario': 'nombre no listado'
+            },
+            self.propiedad_1_usu_1.id,
+            client,
+            token_usuario_3
+        )
+        assert self.respuesta.status_code == 400
