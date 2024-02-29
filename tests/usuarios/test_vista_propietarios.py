@@ -37,9 +37,11 @@ class TestListarPropietarios:
     def test_listar_propietarios_retorna_lista_de_propietarios(self, client):
         token_admin= create_access_token(identity=self.datos_usuario_admin.id)
         self.actuar(client,token_admin)
-        assert len(self.respuesta_json['propietarios_nombres']) == 2
-        assert self.datos_usuario_propietario_1.nombre in self.respuesta_json['propietarios_nombres']
-        assert self.datos_usuario_propietario_2.nombre in self.respuesta_json['propietarios_nombres']
+        assert len(self.respuesta_json) == 2
+        
+        propietarios_nombres=[propietario["nombre"] for propietario in self.respuesta_json]
+        assert self.datos_usuario_propietario_1.nombre in propietarios_nombres
+        assert self.datos_usuario_propietario_2.nombre in propietarios_nombres
 
     def test_dar_propietarios_sin_permisos_retorna_400(self, client):
         token_propietario= create_access_token(identity=self.datos_usuario_propietario_1.id)
