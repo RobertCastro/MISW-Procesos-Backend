@@ -15,7 +15,7 @@ from modelos import db, Usuario
 from vistas.tipo_movimientos import VistaTipoMovimientos
 from vistas.roles import VistaRoles
 from vistas.tipo_ids import VistaTipoId
-
+from vistas.propietarios import VistaPropietarios
 
 
 def create_flask_app():
@@ -54,6 +54,7 @@ def add_urls(app):
     api.add_resource(VistaTipoMovimientos, '/tipo-movimientos')
     api.add_resource(VistaRoles, '/roles')
     api.add_resource(VistaTipoId, '/tipo-ids')
+    api.add_resource(VistaPropietarios, '/propietarios')
 
 if __name__ == '__main__':
     app = create_flask_app()
