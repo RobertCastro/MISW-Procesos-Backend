@@ -15,6 +15,7 @@ from modelos import db, Usuario
 from vistas.tipo_movimientos import VistaTipoMovimientos
 from vistas.roles import VistaRoles
 from vistas.tipo_ids import VistaTipoId
+from vistas.mantenimientos import VistaMantenimientos
 
 def create_flask_app():
     app = Flask(__name__)
@@ -50,10 +51,15 @@ def create_flask_app():
     api.add_resource(VistaTipoMovimientos, '/tipo-movimientos')
     api.add_resource(VistaRoles, '/roles')
     api.add_resource(VistaTipoId, '/tipo-ids')
+    
+    # Mantenimientos
+    api.add_resource(VistaMantenimientos, '/propiedades/<int:id_propiedad>/mantenimientos')
     return app
 
 app = create_flask_app()
 
 if __name__ == '__main__':
     # Only run the app if executed directly
-    app.run()
+    app.run(
+        debug=True
+    )
