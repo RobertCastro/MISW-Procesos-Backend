@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 class TestEliminarMovimiento:
 
     def setup_method(self):
-        self.usuario_1 = Usuario(usuario='usuario_1', contrasena='123456',rol='PROPIETARIO')
+        self.usuario_1 = Usuario(usuario='usuario_1', contrasena='123456',rol='ADMINISTRADOR')
         self.usuario_2 = Usuario(usuario='usuario_2', contrasena='123456',rol='PROPIETARIO')
         db.session.add(self.usuario_1)
         db.session.add(self.usuario_2)
@@ -59,11 +59,17 @@ class TestEliminarMovimiento:
         self.actuar(client, self.movimiento_mascota.id, token=token_usuario_1)
         assert self.respuesta.status_code == 204
 
-    def test_retorna_404_si_movimiento_no_es_de_propiedad_del_usuario(self, client):
-        token_usuario_2 = create_access_token(identity=self.usuario_2.id)
-        self.actuar(client, self.movimiento_mascota.id, token=token_usuario_2)
+    def test_retorna_404_si_movimiento_no_es_encontrado(self, client):
+        token_usuario_1 = create_access_token(identity=self.usuario_1.id)
+        self.actuar(client, 8, token=token_usuario_1)
         assert self.respuesta.status_code == 404
         assert self.respuesta.json == {'mensaje': 'movimiento no encontrado'}
+
+    def test_retorna_400_si_usuario_es_propietario(self, client):
+        token_usuario_2 = create_access_token(identity=self.usuario_2.id)
+        self.actuar(client, self.movimiento_mascota.id, token=token_usuario_2)
+        assert self.respuesta.status_code == 400
+        assert self.respuesta.json == {'mensaje': 'No tiene permisos para eliminar movimientos'}
 
     def test_retorna_401_token_no_enviado(self, client):
         self.actuar(client, 123)

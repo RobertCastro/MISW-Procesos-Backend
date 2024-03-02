@@ -12,6 +12,9 @@ class VistaMovimiento(Resource):
 
     @jwt_required()
     def put(self, id_movimiento):
+        rol=current_user.rol.value
+        if rol != 'ADMINISTRADOR':
+            return {'mensaje': 'No tiene permisos para editar movimientos'}, 400
         resultado_buscar_movimiento = buscar_movimiento(id_movimiento, current_user.id)
         if resultado_buscar_movimiento.error:
             return resultado_buscar_movimiento.error
@@ -24,6 +27,9 @@ class VistaMovimiento(Resource):
     
     @jwt_required()
     def delete(self, id_movimiento):
+        rol=current_user.rol.value
+        if rol != 'ADMINISTRADOR':
+            return {'mensaje': 'No tiene permisos para eliminar movimientos'}, 400
         resultado_buscar_movimiento = buscar_movimiento(id_movimiento, current_user.id)
         if resultado_buscar_movimiento.error:
             return resultado_buscar_movimiento.error
