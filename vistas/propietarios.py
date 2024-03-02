@@ -17,4 +17,4 @@ class VistaPropietarios(Resource):
         
         propietarios = Usuario.query.filter(Usuario.rol == 'PROPIETARIO', Usuario.celular != '').all()
 
-        return [{'nombre':propietario.nombre } for propietario in propietarios],200
+        return [{'nombre':propietario.nombre, 'celular':propietario.celular} for propietario in propietarios],200
