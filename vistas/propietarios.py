@@ -15,6 +15,6 @@ class VistaPropietarios(Resource):
         if current_user.rol.value != 'ADMINISTRADOR':
             return {'mensaje': 'No tiene permisos para listar usuarios'}, 400
         
-        propietarios = Usuario.query.filter(Usuario.rol == 'PROPIETARIO').all()
+        propietarios = Usuario.query.filter(Usuario.rol == 'PROPIETARIO', Usuario.celular != '').all()
 
         return [{'nombre':propietario.nombre } for propietario in propietarios],200
