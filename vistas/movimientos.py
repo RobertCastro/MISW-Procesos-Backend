@@ -17,6 +17,9 @@ class VistaMovimientos(Resource):
         if resultado_buscar_propiedad.error:
            return resultado_buscar_propiedad.error
         try:
+            rol=current_user.rol.value
+            if rol != 'ADMINISTRADOR':
+                return {'mensaje': 'No tiene permisos para crear movimientos'}, 400
             movimiento = movimiento_schema.load(request.json, session=db.session)
             movimiento.id_propiedad = id_propiedad
             db.session.add(movimiento)
