@@ -17,30 +17,7 @@ from vistas.roles import VistaRoles
 from vistas.tipo_ids import VistaTipoId
 from vistas.propietarios import VistaPropietarios
 
-
-def create_flask_app():
-    app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///admon_reservas.db'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['JWT_SECRET_KEY'] = 'frase-secreta'
-    app.config['PROPAGATE_EXCEPTIONS'] = True
-
-    app_context = app.app_context()
-    app_context.push()
-    add_urls(app)
-    CORS(app)
-
-    jwt = JWTManager(app)
-
-    @jwt.user_lookup_loader
-    def user_lookup_callback(_jwt_header, jwt_data):
-        identity = jwt_data["sub"]
-        return Usuario.query.filter_by(id=identity).one_or_none()
-
-    return app
-
-
-def add_urls(app):
+def add_resources_urls(app):
     api = Api(app)
     api.add_resource(VistaSignIn, '/signin', '/signin/<int:id_usuario>')
     api.add_resource(VistaLogIn, '/login')
@@ -55,9 +32,3 @@ def add_urls(app):
     api.add_resource(VistaRoles, '/roles')
     api.add_resource(VistaTipoId, '/tipo-ids')
     api.add_resource(VistaPropietarios, '/propietarios')
-
-if __name__ == '__main__':
-    app = create_flask_app()
-    db.init_app(app)
-    db.create_all()
-    app.run()

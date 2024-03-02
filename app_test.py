@@ -11,12 +11,11 @@ def create_flask_app():
     app.config['JWT_SECRET_KEY'] = 'frase-secreta'
     app.config['PROPAGATE_EXCEPTIONS'] = True
 
-    db.init_app(app)
-
-    # Add CORS support
+    app_context = app.app_context()
+    app_context.push()
+    add_resources_urls(app)
     CORS(app)
 
-    # Initialize JWT
     jwt = JWTManager(app)
 
     @jwt.user_lookup_loader
@@ -24,11 +23,11 @@ def create_flask_app():
         identity = jwt_data["sub"]
         return Usuario.query.filter_by(id=identity).one_or_none()
 
-    add_resources_urls(app)
-    
     return app
 
-app = create_flask_app()
 
 if __name__ == '__main__':
+    app = create_flask_app()
+    db.init_app(app)
+    db.create_all()
     app.run()
