@@ -12,10 +12,12 @@ class TestListarPropietarios:
         self.datos_usuario_admin = Usuario(usuario='test_admin', contrasena='123456', rol=TipoRol.ADMINISTRADOR.value)
         self.datos_usuario_propietario_1 = Usuario(usuario='test_propietario_1', contrasena='123456', rol=TipoRol.PROPIETARIO.value, nombre=self.data_factory.name(), apellidos=self.data_factory.name(), correo=self.data_factory.email(), celular=self.data_factory.phone_number())
         self.datos_usuario_propietario_2 = Usuario(usuario='test_propietario_2', contrasena='123456', rol=TipoRol.PROPIETARIO.value, nombre=self.data_factory.name(), apellidos=self.data_factory.name(), correo=self.data_factory.email(), celular=self.data_factory.phone_number())
+        self.datos_usuario_propietario_sin_cel = Usuario(usuario='test_propietario_3', contrasena='123456', rol=TipoRol.PROPIETARIO.value, nombre=self.data_factory.name(), apellidos=self.data_factory.name(), correo=self.data_factory.email(), celular='')
 
         db.session.add(self.datos_usuario_admin)
         db.session.add(self.datos_usuario_propietario_1)
         db.session.add(self.datos_usuario_propietario_2)
+        db.session.add(self.datos_usuario_propietario_sin_cel)
         db.session.commit()
 
     def teardown_method(self):
@@ -34,7 +36,7 @@ class TestListarPropietarios:
         self.actuar(client,token_admin)
         assert self.respuesta.status_code == 200
 
-    def test_listar_propietarios_retorna_lista_de_propietarios(self, client):
+    def test_listar_propietarios_retorna_lista_de_propietarios_con_cel(self, client):
         token_admin= create_access_token(identity=self.datos_usuario_admin.id)
         self.actuar(client,token_admin)
         assert len(self.respuesta_json) == 2
