@@ -11,6 +11,7 @@ class TestActualizarPropiedad:
         self.usuario_1 = Usuario(usuario='usuario_1', contrasena='123456',rol='PROPIETARIO',nombre="nombre1",celular='1234567')
         self.usuario_2 = Usuario(usuario='usuario_2', contrasena='123456',rol='PROPIETARIO',nombre="nombre2",celular='7654321')
         self.usuario_3 = Usuario(usuario='usuario_3', contrasena='123456',rol='ADMINISTRADOR')
+        self.usuario_propietario_cel_vacio = Usuario(usuario='usuario_propietario_cel_vacio', contrasena='123456',rol='PROPIETARIO',nombre="usuario_propietario_cel_vacio",celular='')
         db.session.add(self.usuario_1)
         db.session.add(self.usuario_2)
         db.session.add(self.usuario_3)
@@ -123,6 +124,18 @@ class TestActualizarPropiedad:
         self.actuar(
             {
                 'nombre_propietario': ''
+            },
+            self.propiedad_1_usu_1.id,
+            client,
+            token_usuario_3
+        )
+        assert self.respuesta.status_code == 400
+    
+    def test_retorna_400_al_actualizar_propiedad_celular_propietario_vacio(self, client):
+        token_usuario_3 = create_access_token(identity=self.usuario_3.id) 
+        self.actuar(
+            {
+                'nombre_propietario': self.usuario_propietario_cel_vacio.nombre
             },
             self.propiedad_1_usu_1.id,
             client,
