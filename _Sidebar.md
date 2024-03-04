@@ -37,6 +37,9 @@
 * [Video Retrospectiva Sprint 1](https://uniandes-my.sharepoint.com/:v:/g/personal/da_gamez96_uniandes_edu_co/Ebvr4_0RurRNsxJ6SBGR0BsBb0vfLRkoPjle33P0-14lZQ)
 * [Presentación Retrospectiva Sprint 1](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/files/14396852/Retrospectiva.Sprint.1.Grupo.23.pptx)
 
+#### Sprint 2
+* [Cálculo de velocidad]()
+* [Presentación BAD SMELLS]()
 
 
 ### Otros
