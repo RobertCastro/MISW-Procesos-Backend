@@ -38,9 +38,9 @@
 * [Presentación Retrospectiva Sprint 1](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/files/14396852/Retrospectiva.Sprint.1.Grupo.23.pptx)
 
 #### Sprint 2
-* [Cálculo de velocidad]()
-* [Presentación BAD SMELLS]()
+* [Calculo de Velocidad Sprint 2.xlsx](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/files/14475662/Calculo.de.Velocidad.Sprint.2.xlsx)
 
+* [Presentación BAD SMELLS](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/files/14475658/Revision.BAD.Smells.Sprint.2.pptx)
 
 ### Otros
 * [Guía para la organización de la documentación del proyecto](Guía-organización-documentación-proyecto)
