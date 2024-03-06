@@ -35,7 +35,7 @@ class VistaMantenimientos(Resource):
             
             rol = current_user.rol.value
             if rol != 'ADMINISTRADOR':
-                return {'mensaje': 'No tiene permisos para crear mantenimientos'}, 403
+                return {'mensaje': 'No tiene permisos para crear mantenimientos'}, 400
             
             propiedad = Propiedad.query.get(id_propiedad)
             if not propiedad:
