@@ -23,3 +23,24 @@ class VistaMantenimientos(Resource):
         mantenimientos = mantenimientos_query.all()
 
         return mantenimiento_schema.dump(mantenimientos), 200
+
+
+    @jwt_required()
+    def put(self, id_propiedad, id_mantenimiento):
+        current_user = get_current_user()
+
+        if current_user.rol.value != 'ADMINISTRADOR':
+            return {"mensaje": "Acceso denegado"}, 403
+
+        propiedad = Propiedad.query.get(id_propiedad)
+
+        if propiedad is None:
+            return {"mensaje": "Propiedad no encontrada"}, 404
+
+        mantenimiento = Mantenimiento.query.get(id_mantenimiento)
+
+        if mantenimiento is None:
+                    return {"mensaje": "Mantenimiento no encontrado"}, 404
+        
+        #TODO: Completar estraegia de edicion.
+
