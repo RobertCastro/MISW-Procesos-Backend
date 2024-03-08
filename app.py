@@ -4,6 +4,10 @@ from flask_jwt_extended import JWTManager
 from modelos import db, Usuario
 from app_utils import add_resources_urls
 
+import logging
+logging.basicConfig()
+logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
+
 def create_flask_app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///admon_reservas.db'
@@ -31,4 +35,7 @@ def create_flask_app():
 app = create_flask_app()
 
 if __name__ == '__main__':
-    app.run()
+    # Listar las rutas y métodos permitidos
+    # for rule in app.url_map.iter_rules():
+    #     print(f'Ruta: {rule}, Métodos permitidos: {rule.methods}')
+    app.run(debug=True)

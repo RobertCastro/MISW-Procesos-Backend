@@ -17,6 +17,8 @@ from vistas.tipo_movimientos import VistaTipoMovimientos
 from vistas.roles import VistaRoles
 from vistas.tipo_ids import VistaTipoId
 from vistas.propietarios import VistaPropietarios
+from vistas.tipo_mantenimientos import VistaTipoMantenimientos
+from vistas.periodicidad import VistaPeriodicidad
 
 def add_resources_urls(app):
     api = Api(app)
@@ -34,3 +36,5 @@ def add_resources_urls(app):
     api.add_resource(VistaTipoId, '/tipo-ids')
     api.add_resource(VistaPropietarios, '/propietarios')
     api.add_resource(VistaMantenimientos, '/propiedades/<int:id_propiedad>/mantenimientos')
+    api.add_resource(VistaTipoMantenimientos, '/tipo-mantenimientos')
+    api.add_resource(VistaPeriodicidad, '/periodicidad')

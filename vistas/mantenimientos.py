@@ -1,5 +1,6 @@
-from flask import request
-from flask_jwt_extended import get_current_user, jwt_required
+import json
+from flask import make_response, request
+from flask_jwt_extended import current_user, get_current_user, jwt_required
 from flask_restful import Resource
 from marshmallow import ValidationError
 from modelos import Mantenimiento, MantenimientoSchema, Propiedad, db
@@ -23,24 +24,31 @@ class VistaMantenimientos(Resource):
         mantenimientos = mantenimientos_query.all()
 
         return mantenimiento_schema.dump(mantenimientos), 200
-
-
+    
+    
     @jwt_required()
-    def put(self, id_propiedad, id_mantenimiento):
-        current_user = get_current_user()
+    def post(self, id_propiedad):
+        try:
+            esquema = MantenimientoSchema(session=db.session)
+            datos = request.get_json()
+            mantenimiento = esquema.load(datos)
+            
+            rol = current_user.rol.value
+            if rol != 'ADMINISTRADOR':
+                return {'mensaje': 'No tiene permisos para crear mantenimientos'}, 400
+            
+            propiedad = Propiedad.query.get(id_propiedad)
+            if not propiedad:
+                return {"error": "La propiedad no existe"}, 404
 
-        if current_user.rol.value != 'ADMINISTRADOR':
-            return {"mensaje": "Acceso denegado"}, 403
+            mantenimiento.id_propiedad = id_propiedad
+            db.session.add(mantenimiento)
+            db.session.commit()
 
-        propiedad = Propiedad.query.get(id_propiedad)
-
-        if propiedad is None:
-            return {"mensaje": "Propiedad no encontrada"}, 404
-
-        mantenimiento = Mantenimiento.query.get(id_mantenimiento)
-
-        if mantenimiento is None:
-                    return {"mensaje": "Mantenimiento no encontrado"}, 404
+        except ValidationError as validation_error:
+            return validation_error.messages, 400
+        except exc.IntegrityError:
+            db.session.rollback()
+            return {'mensaje': 'Hubo un error creando el mantenimiento. Revise los datos proporcionados'}, 500
         
-        #TODO: Completar estraegia de edicion.
-
+        return esquema.dump(mantenimiento), 201
