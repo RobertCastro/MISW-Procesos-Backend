@@ -17,4 +17,4 @@ class VistaLogIn(Resource):
         }
         
         token_de_acceso = create_access_token(identity=usuario.id, additional_claims=additional_claims)
-        return {"mensaje": "Inicio de sesion exitoso", "token": token_de_acceso,"rol":usuario.rol.value}
+        return {"mensaje": "Inicio de sesion exitoso", "token": token_de_acceso,"rol":usuario.rol.value, "idUsuario" : usuario.id}, 200

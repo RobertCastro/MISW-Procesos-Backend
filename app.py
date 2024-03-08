@@ -4,9 +4,9 @@ from flask_jwt_extended import JWTManager
 from modelos import db, Usuario
 from app_utils import add_resources_urls
 
-# import logging
-# logging.basicConfig()
-# logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
+import logging
+logging.basicConfig()
+logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
 
 def create_flask_app():
     app = Flask(__name__)
