@@ -43,17 +43,22 @@ class TestEditarMantenimientos:
         headers = {'Content-Type': 'application/json'}
         if token:
             headers.update({'Authorization': f'Bearer {token}'})
-        self.respuesta = client.put(f'/propiedades/{id_propiedad}/mantenimientos', data=json.dumps(datos_mantenmiento), headers=headers)
+        id_mantenimiento_editar = str(self.obtener_un_id_mantenimiento_existente())
+        self.respuesta = client.put(f'/propiedades/{id_propiedad}/mantenimientos/'+id_mantenimiento_editar, data=json.dumps(datos_mantenmiento), headers=headers)
         self.respuesta_json = self.respuesta.json
 
     def test_retorna_200_al_actualizar_mantenimiento(self, client):
         token_usuario_admin = create_access_token(identity=self.usuario_admin.id) 
-        self.actuar(
+        self.actuar(datos_mantenmiento=
             {
                 'costo': '500',
             },
-            self.propiedad_1_usu_1.id,
-            client,
-            token_usuario_admin
+            client=client,
+            id_propiedad=str(self.propiedad_1.id),
+            token=token_usuario_admin
         )
         assert self.respuesta.status_code == 200
+
+    def obtener_un_id_mantenimiento_existente(self):
+        mantenimiento = Mantenimiento.query.filter_by(id_propiedad=self.propiedad_1.id).first()
+        return mantenimiento.id
