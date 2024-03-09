@@ -32,7 +32,7 @@ pipeline {
         stage('Install libraries') {
             steps {
                 script {
-                    docker.image('python:3.7.6').inside {
+                    docker.image('python:3.9').inside {
                         sh '''
                             pip install --user -r requirements.txt
                         '''
@@ -43,7 +43,7 @@ pipeline {
         stage('Testing') {
             steps {
                 script {
-                    docker.image('python:3.7.6').inside {
+                    docker.image('python:3.9').inside {
                         sh '''
 				python -m unittest discover -s tests -v
                         '''
@@ -54,7 +54,7 @@ pipeline {
         stage('Coverage') {
             steps {
                 script {
-                    docker.image('python:3.7.6').inside {
+                    docker.image('python:3.9').inside {
                         sh '''
                             python -m coverage run -m unittest discover -s tests -v
                             python -m coverage html
