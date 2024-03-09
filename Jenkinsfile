@@ -56,7 +56,7 @@ pipeline {
                 script {
                     docker.image('python:3.9').inside {
                         sh '''
-                            python -m coverage run -m pytest
+                            python -m coverage run --omit=".local/lib/python3.9/site-packages/*" -m pytest
                             python -m coverage html
                         ''' 
                     }
