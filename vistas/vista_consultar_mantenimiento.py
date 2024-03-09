@@ -5,17 +5,20 @@ from flask_restful import Resource
 from marshmallow import ValidationError
 from modelos import Mantenimiento, MantenimientoSchema, Propiedad, db
 from sqlalchemy import exc
-mantenimiento_schema = MantenimientoSchema(many=True)
+mantenimiento_schema = MantenimientoSchema()
 
 class VistaConsultarUnMantenimiento(Resource):
 
     @jwt_required()
     def get(self, id_mantenimiento):
-
-        if mantenimiento is None:
-            return {"mensaje": "Mantenimiento no encontrado"}, 404
-
-        mantenimientos_query = Mantenimiento.query.filter_by(id=id_mantenimiento)
-        mantenimiento = mantenimientos_query.one_or_404()
-
-        return mantenimiento_schema.dump(mantenimiento), 200
+        try:
+            mantenimientos_query = Mantenimiento.query.filter_by(id=id_mantenimiento)
+            mantenimiento = mantenimientos_query.one_or_none()
+            if not mantenimiento:
+                return {"error": "El mantenimiento no existe"}, 404
+            return mantenimiento_schema.dump(mantenimiento)
+        except ValidationError as validation_error:
+            return validation_error.messages, 400
+        except exc.IntegrityError:
+            db.session.rollback()
+            return {'mensaje': 'Hubo un error consultando el mantenimiento'}, 409
