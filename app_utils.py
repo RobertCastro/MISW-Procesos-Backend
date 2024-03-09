@@ -4,6 +4,7 @@ from flask_jwt_extended import JWTManager
 from flask_restful import Api
 from vistas.bancos import VistaBancos
 from vistas.mantenimientos import VistaMantenimientos
+from vistas.vista_editar_mantenimiento import VistaEditarMantenimientos
 from vistas.movimiento import VistaMovimiento
 from vistas.movimientos import VistaMovimientos
 from vistas.propiedades import VistaPropiedades
@@ -36,5 +37,6 @@ def add_resources_urls(app):
     api.add_resource(VistaTipoId, '/tipo-ids')
     api.add_resource(VistaPropietarios, '/propietarios')
     api.add_resource(VistaMantenimientos, '/propiedades/<int:id_propiedad>/mantenimientos')
+    api.add_resource(VistaEditarMantenimientos, '/propiedades/<int:id_propiedad>/mantenimientos/<int:id_mantenimiento>')
     api.add_resource(VistaTipoMantenimientos, '/tipo-mantenimientos')
     api.add_resource(VistaPeriodicidad, '/periodicidad')
