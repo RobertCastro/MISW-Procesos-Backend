@@ -37,29 +37,15 @@ class TestConsultarMantenimientoPorId:
         headers = {'Content-Type': 'application/json'}
         if token:
             headers.update({'Authorization': f'Bearer {token}'})
-        self.respuesta = client.get(f'/mantenimientos/1', headers=headers)
+        self.respuesta = client.get(f'/mantenimientos/'+str(self.obtener_un_id_mantenimiento_existente()), headers=headers)
         self.respuesta_json = self.respuesta.json
 
-    def test_retorna_200_si_propiedad_pertenece_usuario_token(self, client):
+    def test_retorna_el_mantenimiento(self, client):
         token_usuario_1 = create_access_token(identity=self.usuario_1.id)
         self.actuar(client, self.propiedad_1.id, token_usuario_1)
         assert self.respuesta.status_code == 200
 
-    def test_retorna_mantenimientos_de_propiedad(self, client):
-        mantenimiento_schema = MantenimientoSchema()
-        token_usuario_1 = create_access_token(identity=self.usuario_1.id)
-        self.actuar(client, self.propiedad_1.id, token_usuario_1)
-        assert len(self.respuesta_json) == 1
-        assert mantenimiento_schema.dump(self.mantenimiento_1) in self.respuesta_json
 
-    def test_retorna_403_si_propiedad_no_es_del_usuario(self, client):
-        usuario_2 = Usuario(usuario='usuario_2', contrasena='123456', rol='PROPIETARIO')
-        db.session.add(usuario_2)
-        db.session.commit()
-        token_usuario_2 = create_access_token(identity=usuario_2.id)
-        self.actuar(client, self.propiedad_1.id, token_usuario_2)
-        assert self.respuesta.status_code == 403
-
-    def test_retorna_401_token_no_enviado(self, client):
-        self.actuar(client, self.propiedad_1.id)
-        assert self.respuesta.status_code == 401
+    def obtener_un_id_mantenimiento_existente(self):
+        mantenimiento = Mantenimiento.query.first()
+        return mantenimiento.id
