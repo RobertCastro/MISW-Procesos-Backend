@@ -13,7 +13,10 @@ class VistaPropiedades(Resource):
 
     @jwt_required()
     def post(self):
+        rol=current_user.rol.value
         try:
+            if rol != 'ADMINISTRADOR':
+                return {'mensaje': 'No tiene permisos para crear propiedades'}, 400
             propiedad = propiedad_schema.load(request.json, session=db.session)
             propiedad.id_usuario = current_user.id
             db.session.add(propiedad)
@@ -27,5 +30,9 @@ class VistaPropiedades(Resource):
     
     @jwt_required()
     def get(self):
-        propiedades = Propiedad.query.filter(Propiedad.id_usuario == current_user.id)
+        if current_user.rol.value == 'ADMINISTRADOR':
+            propiedades = Propiedad.query.all()
+        else:
+            propiedades = Propiedad.query.filter(Propiedad.id_usuario == current_user.id)
+
         return propiedad_schema.dump(propiedades, many=True)

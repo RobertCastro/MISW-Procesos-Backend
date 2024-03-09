@@ -1,10 +1,9 @@
 import json
 from flask_jwt_extended import create_access_token
-from modelos import Usuario, Propiedad, Reserva, Movimiento, MovimientoSchema, TipoMovimiento, Banco, db
-from datetime import datetime
+from modelos import Usuario, Propiedad, Mantenimiento, MantenimientoSchema, TipoMantenimiento, Banco, db, Periodicidad
 
 
-class TestCrearMovimiento:
+class TestCrearMantenimiento:
 
     def setup_method(self):
         self.usuario_1 = Usuario(usuario='usuario_1', contrasena='123456',rol='ADMINISTRADOR')
@@ -29,33 +28,32 @@ class TestCrearMovimiento:
         db.session.add(self.propiedad_3_usu_3)
         db.session.commit()
 
-        self.reserva_1 = Reserva(nombre='Julio Hernandez', fecha_ingreso=datetime.strptime('2023-01-03', '%Y-%m-%d'),
-                          fecha_salida=datetime.strptime('2023-01-06', '%Y-%m-%d'), plataforma_reserva='Booking', total_reserva=568000,
-                          comision='74800', id_propiedad=self.propiedad_1_usu_1.id)
+        self.mantenimiento_1 = Mantenimiento(costo=56800, tipo_mantenimiento=TipoMantenimiento.LIMPIEZA.value, id_propiedad=self.propiedad_1_usu_1.id, id_usuario=self.usuario_1.id, periodicidad=Periodicidad.MENSUAL.value, estado=True) 
         
-        db.session.add(self.reserva_1)
+        db.session.add(self.mantenimiento_1)
         db.session.commit()
 
-        self.datos_movimiento = {
-            'concepto': 'Ingreso mascota',
-            'tipo_movimiento': TipoMovimiento.INGRESO.value,
-            'fecha': '2023-01-06T15:00:00',
-            'valor': 123
+        self.datos_mantenimiento = {
+            'id_propiedad' : self.propiedad_1_usu_1.id,
+            'id_usuario' : self.usuario_1.id,
+            'costo' : 123,
+            'periodicidad' : Periodicidad.SEMANAL.value,
+            'tipo_mantenimiento': TipoMantenimiento.ARREGLO.value,
+            'estado': True
         }
 
     def teardown_method(self):
         db.session.rollback()
         Propiedad.query.delete()
-        Reserva.query.delete()
         Usuario.query.delete()
-        Movimiento.query.delete()
+        Mantenimiento.query.delete()
 
-    def actuar(self, client, id_propiedad, datos_movimiento=None, token=None):
-        datos_movimiento = datos_movimiento or self.datos_movimiento
+    def actuar(self, client, id_propiedad, datos_mantenimiento=None, token=None):
+        datos_mantenimiento = datos_mantenimiento or self.datos_mantenimiento
         headers = {'Content-Type': 'application/json'}
         if token:
             headers.update({'Authorization': f'Bearer {token}'})
-        self.respuesta = client.post(f'/propiedades/{id_propiedad}/movimientos', data=json.dumps(datos_movimiento), headers=headers)
+        self.respuesta = client.post(f'/propiedades/{id_propiedad}/mantenimientos', data=json.dumps(datos_mantenimiento), headers=headers)
         self.respuesta_json = self.respuesta.json
 
     def test_retorna_201(self, client):
@@ -63,41 +61,37 @@ class TestCrearMovimiento:
         self.actuar(client, self.propiedad_1_usu_1.id, token=token_usuario_1)
         assert self.respuesta.status_code == 201
 
-    def test_retorna_movimiento_creado(self, client):
+    def test_retorna_mantenimiento_creado(self, client):
         token_usuario_1 = create_access_token(identity=self.usuario_1.id)
         self.actuar(client, self.propiedad_1_usu_1.id, token=token_usuario_1)
         assert self.respuesta_json
         assert 'id' in self.respuesta_json
-        assert 'fecha' in self.respuesta_json
-        assert 'valor' in self.respuesta_json
-        assert 'concepto' in self.respuesta_json
-        assert 'id_reserva' in self.respuesta_json
+        assert 'periodicidad' in self.respuesta_json
+        assert 'costo' in self.respuesta_json
+        assert 'tipo_mantenimiento' in self.respuesta_json
+        assert 'id_usuario' in self.respuesta_json
         assert 'id_propiedad' in self.respuesta_json
+        assert 'estado' in self.respuesta_json
 
     def test_crea_registro_db(self, client):
         token_usuario_1 = create_access_token(identity=self.usuario_1.id)
         self.actuar(client, self.propiedad_1_usu_1.id, token=token_usuario_1)
-        assert Movimiento.query.filter(Movimiento.id == self.respuesta_json['id'],
-                                       Movimiento.id_propiedad == self.propiedad_1_usu_1.id).one_or_none()
+        assert Mantenimiento.query.filter(Mantenimiento.id == self.respuesta_json['id'],
+                                       Mantenimiento.id_propiedad == self.propiedad_1_usu_1.id).one_or_none()
 
-    def test_retorna_401_token_no_enviado(self, client):
-        self.datos_movimiento.update({'id_reserva': self.reserva_1.id})
-        self.actuar(client, self.propiedad_1_usu_1.id)
-        assert self.respuesta.status_code == 401
-
-    def test_retorna_201_crear_movimiento_propiedad_otro_usuario(self, client):
+    def test_retorna_201_crear_mantenimiento_propiedad_otro_usuario(self, client):
         token_usuario_2 = create_access_token(identity=self.usuario_2.id)
         self.actuar(client, self.propiedad_1_usu_1.id, token=token_usuario_2)
         assert self.respuesta.status_code == 201
 
-    def test_crea_movimiento_propiedad_enviada_url(self, client):
+    def test_crea_mantenimiento_propiedad_enviada_url(self, client):
         token_usuario_1 = create_access_token(identity=self.usuario_1.id)
-        self.datos_movimiento.update({'id_propiedad': 123})
+        self.datos_mantenimiento.update({'id_propiedad': 123})
         self.actuar(client, self.propiedad_1_usu_1.id, token=token_usuario_1)
-        assert Movimiento.query.filter(Movimiento.id == self.respuesta_json['id'],
-                                       Movimiento.id_propiedad == self.propiedad_1_usu_1.id).one_or_none()
+        assert Mantenimiento.query.filter(Mantenimiento.id == self.respuesta_json['id'],
+                                       Mantenimiento.id_propiedad == self.propiedad_1_usu_1.id).one_or_none()
 
-    def test_retorna_400_crear_movimiento_usuario_propietario(self, client):
+    def test_retorna_400_crear_mantenimiento_usuario_propietario(self, client):
         token_usuario_3 = create_access_token(identity=self.usuario_3.id)
         self.actuar(client, self.propiedad_3_usu_3.id, token=token_usuario_3)
         assert self.respuesta.status_code == 400

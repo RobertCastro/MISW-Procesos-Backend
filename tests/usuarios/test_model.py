@@ -10,15 +10,30 @@ class TestCreateUser(TestCase):
         Usuario.query.delete()
 
     def test_solo_un_usuario_es_creado_en_db(self):
-        new_user = Usuario(usuario='test_user', contrasena='123456')
+        new_user = Usuario(usuario='test_user', contrasena='123456',rol='ADMINISTRADOR')
         db.session.add(new_user)
         db.session.commit()
 
         users_in_db = Usuario.query.all()
         self.assertEqual(len(users_in_db), 1)
 
+    def test_usuario_propietario_es_creado_en_db(self):
+        new_user = Usuario(usuario='test_user', contrasena='123456',rol='PROPIETARIO',
+                           nombre='Daniel',
+                           apellidos='Gamez Salcedo',
+                           celular='3002336655',
+                           correo='correo_test@gmail.com',
+                           tipo_id='CEDULA',
+                           identificacion='123456789',
+                           )
+        db.session.add(new_user)
+        db.session.commit()
+
+        users_in_db = Usuario.query.all()
+        self.assertEqual(len(users_in_db), 1)
+    
     def test_usuario_esperado_es_creado(self):
-        new_user = Usuario(usuario='test_user', contrasena='123456')
+        new_user = Usuario(usuario='test_user', contrasena='123456',rol='ADMINISTRADOR')
         db.session.add(new_user)
         db.session.commit()
 
@@ -26,11 +41,11 @@ class TestCreateUser(TestCase):
         self.assertEqual(user_from_db.contrasena, '123456')
 
     def test_dispara_un_error_de_integridad(self):
-        first_user = Usuario(usuario='test_user', contrasena='123456')
+        first_user = Usuario(usuario='test_user', contrasena='123456',rol='ADMINISTRADOR')
         db.session.add(first_user)
         db.session.commit()
         with self.assertRaises(exc.IntegrityError):
-            user_same_username = Usuario(usuario='test_user', contrasena='abcdef')
+            user_same_username = Usuario(usuario='test_user', contrasena='abcdef',rol='ADMINISTRADOR')
             db.session.add(user_same_username)
             db.session.commit()
 

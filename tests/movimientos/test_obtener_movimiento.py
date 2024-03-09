@@ -6,10 +6,12 @@ from datetime import datetime
 class TestObtenerMovimiento:
 
     def setup_method(self):
-        self.usuario_1 = Usuario(usuario='usuario_1', contrasena='123456')
-        self.usuario_2 = Usuario(usuario='usuario_2', contrasena='123456')
+        self.usuario_1 = Usuario(usuario='usuario_1', contrasena='123456',rol='PROPIETARIO')
+        self.usuario_2 = Usuario(usuario='usuario_2', contrasena='123456',rol='PROPIETARIO')
+        self.usuario_3 = Usuario(usuario='usuario_3', contrasena='123456',rol='ADMINISTRADOR')
         db.session.add(self.usuario_1)
         db.session.add(self.usuario_2)
+        db.session.add(self.usuario_3)
         db.session.commit()
 
         self.propiedad_1_usu_1 = Propiedad(nombre_propiedad='propiedad cerca a la quebrada', ciudad='Boyaca', municipio='Paipa',
@@ -73,3 +75,14 @@ class TestObtenerMovimiento:
     def test_retorna_401_token_no_enviado(self, client):
         self.actuar(client, 123)
         assert self.respuesta.status_code == 401
+    
+    def test_retorna_200_si_movimiento_pertenece_a_propiedad_administrador_token(self, client):
+        token_usuario_3 = create_access_token(identity=self.usuario_3.id)
+        self.actuar(client, self.movimiento_reserva.id, token_usuario_3)
+        assert self.respuesta.status_code == 200
+        #test the response is correct
+        assert self.respuesta_json['id'] == self.movimiento_reserva.id
+        assert self.respuesta_json['fecha'] == self.movimiento_reserva.fecha.strftime('%Y-%m-%dT%H:%M:%S')
+        assert self.respuesta_json['valor'] == self.movimiento_reserva.valor
+        assert self.respuesta_json['concepto'] == self.movimiento_reserva.concepto
+        assert self.respuesta_json['tipo_movimiento'] == self.movimiento_reserva.tipo_movimiento.value

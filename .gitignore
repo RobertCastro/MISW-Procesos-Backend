@@ -114,6 +114,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+entorno
+.entorno
 
 # Spyder project settings
 .spyderproject
@@ -145,3 +147,7 @@ cython_debug/
 
 #DataBase
 test.db
+admon_reservas_test.db
+
+#Visual Studio
+.code-workspace

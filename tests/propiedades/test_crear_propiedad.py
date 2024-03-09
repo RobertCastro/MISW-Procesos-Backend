@@ -7,10 +7,14 @@ from modelos import Banco, Usuario, Propiedad, db
 class TestCrearPropiedad:
 
     def setup_method(self):
-        self.usuario = Usuario(usuario='test_user', contrasena='123456')
+        self.usuario = Usuario(usuario='test_user', contrasena='123456',rol='ADMINISTRADOR')
+        self.usuario2 = Usuario(usuario='test_user2', contrasena='123456',rol='PROPIETARIO')
         db.session.add(self.usuario)
+        db.session.add(self.usuario2)
+
         db.session.commit()
         self.usuario_token = create_access_token(identity=self.usuario.id)
+        self.usuario2_token = create_access_token(identity=self.usuario2.id)
 
         self.datos_propiedad = {
         'nombre_propiedad': 'Refugio el lago',
@@ -58,6 +62,11 @@ class TestCrearPropiedad:
         self.actuar(token=self.usuario_token, client=client)
         propiedad_db = Propiedad.query.filter(Propiedad.id_usuario == self.usuario.id).first()
         assert propiedad_db
+
+    def test_propiedad_no_es_creada_para_usuario2_en_token(self, client):
+        self.actuar(token=self.usuario2_token, client=client)
+        propiedad_db = Propiedad.query.filter(Propiedad.id_usuario == self.usuario2.id).first()
+        assert not propiedad_db
 
     def test_retorna_campos_esperados(self, client):
         self.actuar(token=self.usuario_token, client=client)
