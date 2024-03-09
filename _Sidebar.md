@@ -42,6 +42,8 @@
 
 * [Presentación BAD SMELLS](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/files/14475658/Revision.BAD.Smells.Sprint.2.pptx)
 
+* [Burndown Chart Excel](Burndown-Chart-Excel)
+
 ### Otros
 * [Guía para la organización de la documentación del proyecto](Guía-organización-documentación-proyecto)
 * [Link enunciado proyecto](https://misw-4201-procesosdesarrolloagil.github.io/mt2_procesos_guias_proyecto/#enunciado)
