@@ -1,0 +1,69 @@
+name: CI Integracion a develop
+on:
+    push:
+        branches:
+            - 'feature/*'
+
+#si el ultimo commit tiene palabra clave (2DEVELOP) se corren los siguientes jobs
+
+jobs:
+    job1:
+        name: Revision e Integracion a rama develop de la rama feature
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout de repositorio
+          uses: actions/checkout@v2
+        
+        - name: Obtener mensaje del ultimo commit
+          id: get_commit_message
+          run: echo ::set-output name=message::$(git log -1 --pretty=%B)
+        
+        - name: Check for Keyword
+          id: check_for_keyword
+          run: |
+            commit_message="${{ steps.get_commit_message.outputs.message }}"
+            keyword="(2DEVELOP)"
+
+            if [[ $commit_message == *"$keyword"* ]]; then
+             echo "::set-output name=keyword_result::True"
+             echo True
+            else
+             echo "::set-output name=keyword_result::False"
+             echo False
+            fi
+        - name: Mezcla develop -> feature
+          id: mezcla_develop_feature
+          uses: tukasz/direct-merge-action@master
+          with:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              source-branch: develop
+              target-branch: ${{ github.ref }}
+          if: steps.check_for_keyword.outputs.keyword_result == 'True'    
+
+        - name: Configuración de entorno de python
+          uses: actions/setup-python@v2
+          with:
+              python-version: '3.9'
+          if: steps.check_for_keyword.outputs.keyword_result == 'True' && steps.mezcla_develop_feature.outcome == 'success'
+
+        - name: Instalación de librerías y dependencias
+          run: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+          if: steps.check_for_keyword.outputs.keyword_result == 'True' && steps.mezcla_develop_feature.outcome == 'success'
+
+        - name: Correr pruebas
+          id: correr-pruebas
+          run: pytest
+          if: steps.check_for_keyword.outputs.keyword_result == 'True' && steps.mezcla_develop_feature.outcome == 'success'
+
+
+        #si las pruebas son exitosas se corre el job de despliegue a develop
+        - name: Mezcla feature -> develop
+          uses: tukasz/direct-merge-action@master
+          with:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            source-branch: ${{ github.ref }}
+            target-branch: develop
+          if: steps.correr-pruebas.outcome == 'success' && steps.check_for_keyword.outputs.keyword_result == 'True' && steps.mezcla_develop_feature.outcome == 'success'
+          

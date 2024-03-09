@@ -1,8 +1,10 @@
+#comentario de prueba, borrar si lo ven
 import enum
 from sqlalchemy import UniqueConstraint
 from flask_sqlalchemy import SQLAlchemy
 from marshmallow import fields
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
+from sqlalchemy.orm import backref
 
 db = SQLAlchemy()
 
@@ -11,6 +13,14 @@ class TipoMovimiento(enum.Enum):
     INGRESO = 'INGRESO'
     EGRESO = 'EGRESO'
 
+class TipoRol(enum.Enum):
+    ADMINISTRADOR = 'ADMINISTRADOR'
+    PROPIETARIO = 'PROPIETARIO'
+
+class TipoId(enum.Enum):
+    CEDULA = 'CEDULA'
+    PASAPORTE = 'PASAPORTE'
+    LICENCIA = 'LICENCIA'
 
 class Banco(enum.Enum):
     BANCO_BBVA                      = 'BANCO_BBVA'
@@ -55,6 +65,31 @@ class Banco(enum.Enum):
     RAPPIPAY                        = 'RAPPIPAY'
     NEQUI                           = 'NEQUI'
 
+class TipoMantenimiento(enum.Enum):
+    ARREGLO = 'ARREGLO'
+    MANTENIMIENTO_GENERAL = 'MANTENIMIENTO_GENERAL'
+    AIRE_ACONDICIONADO = 'AIRE_ACONDICIONADO'
+    LIMPIEZA = 'LIMPIEZA'
+
+class Periodicidad(enum.Enum):
+    SEMANAL = 'SEMANAL'
+    MENSUAL = 'MENSUAL'
+    TRIMESTRAL = 'TRIMESTRAL'
+    SEMESTRAL = 'SEMESTRAL'
+    ANUAL = 'ANUAL'
+
+class Mantenimiento(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    id_propiedad = db.Column(db.Integer, db.ForeignKey('propiedad.id'), nullable=False)
+    id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
+    tipo_mantenimiento = db.Column(db.Enum(TipoMantenimiento), nullable=False)
+    costo = db.Column(db.Integer, nullable=False)
+    periodicidad = db.Column(db.Enum(Periodicidad), nullable=False)
+    estado = db.Column(db.Boolean, nullable=False)
+
+    propiedad = db.relationship('Propiedad', back_populates='mantenimientos')
+    usuario = db.relationship('Usuario', back_populates='mantenimientos')
+
 
 class Propiedad(db.Model):
     __table_args__ = (UniqueConstraint('direccion', 'ciudad', 'municipio', name='unique_address'),)
@@ -71,6 +106,8 @@ class Propiedad(db.Model):
     movimientos = db.relationship('Movimiento', cascade='all, delete, delete-orphan')
     reservas = db.relationship('Reserva', cascade='all, delete, delete-orphan')
     id_usuario = db.Column(db.Integer, db.ForeignKey("usuario.id"), nullable=False)
+    
+    mantenimientos = db.relationship('Mantenimiento', back_populates='propiedad', lazy=True)
 
 
 class Reserva(db.Model):
@@ -106,7 +143,15 @@ class Usuario(db.Model):
     usuario = db.Column(db.String(50), nullable=False)
     contrasena = db.Column(db.String(50), nullable=False)
     propiedades = db.relationship('Propiedad', cascade='all, delete, delete-orphan')
-
+    rol = db.Column(db.Enum(TipoRol))
+    nombre = db.Column(db.String(50))
+    apellidos = db.Column(db.String(50))
+    celular = db.Column(db.Integer)
+    correo = db.Column(db.String(50))
+    tipo_id = db.Column(db.Enum(TipoId))
+    identificacion = db.Column(db.Integer)
+    
+    mantenimientos = db.relationship('Mantenimiento', back_populates='usuario', lazy=True)
 
 class ReservaSchema(SQLAlchemyAutoSchema):
     class Meta:
@@ -141,3 +186,16 @@ class UsuarioSchema(SQLAlchemyAutoSchema):
         include_relationships = True
         load_instance = True
         exclude = ('contrasena',)
+
+class MantenimientoSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = Mantenimiento
+        include_relationships = True
+        load_instance = True
+
+    id_propiedad = fields.Integer(required=True)
+    id_usuario = fields.Integer(required=True)
+    tipo_mantenimiento = fields.Enum(TipoMantenimiento, by_value=True)
+    costo = fields.Integer(required=True)
+    periodicidad = fields.Enum(Periodicidad, by_value=True)
+    estado = fields.Boolean(required=True)

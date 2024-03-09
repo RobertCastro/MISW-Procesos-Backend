@@ -6,8 +6,8 @@ from modelos import Usuario, Propiedad, Reserva, ReservaSchema, Banco, db
 class TestObtenerReserva:
 
     def setup_method(self):
-        self.usuario_1 = Usuario(usuario='usuario_1', contrasena='123456')
-        self.usuario_2 = Usuario(usuario='usuario_2', contrasena='123456')
+        self.usuario_1 = Usuario(usuario='usuario_1', contrasena='123456',rol='ADMINISTRADOR')
+        self.usuario_2 = Usuario(usuario='usuario_2', contrasena='123456',rol='ADMINISTRADOR')
         db.session.add(self.usuario_1)
         db.session.add(self.usuario_2)
         db.session.commit()
