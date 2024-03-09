@@ -79,5 +79,5 @@ def buscar_mantenimiento(id_mantenimiento: int, id_usuario: int) -> ResultadoBus
     if not mantenimiento:
         buscar_movimiento.error = {'mensaje': 'mantenimiento no encontrado'}, 404
     
-    buscar_mantenimiento.movimiento = mantenimiento
+    buscar_mantenimiento.mantenimiento = mantenimiento
     return buscar_mantenimiento
