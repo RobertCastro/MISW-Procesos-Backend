@@ -6,7 +6,7 @@ from marshmallow import ValidationError
 from modelos import Mantenimiento, MantenimientoSchema, Propiedad, db
 from sqlalchemy import exc
 from vistas.utils import buscar_mantenimiento
-mantenimiento_schema = MantenimientoSchema(many=True)
+mantenimiento_schema = MantenimientoSchema()
 
 class VistaEditarMantenimientos(Resource):
     
@@ -18,7 +18,7 @@ class VistaEditarMantenimientos(Resource):
         try:
             rol = current_user.rol.value
             if rol != 'ADMINISTRADOR':
-                return {'mensaje': 'No tiene permisos para crear mantenimientos'}, 400
+                return {'mensaje': 'No tiene permisos para editar mantenimientos'}, 400
             
             print('antes de consultar propiedad')
             propiedad = Propiedad.query.get(id_propiedad)
@@ -31,8 +31,9 @@ class VistaEditarMantenimientos(Resource):
             resultado_buscar_mantenimiento = buscar_mantenimiento(id_mantenimiento, current_user.id)
             if resultado_buscar_mantenimiento.error:
                 return resultado_buscar_mantenimiento.error
-
+            
             mantenimiento = resultado_buscar_mantenimiento.mantenimiento
+
             print('mantenimiento:', mantenimiento)
             print('request.json:', request.json)
             print('ACTUAL mantenimiento.id:', mantenimiento.id)
@@ -45,7 +46,16 @@ class VistaEditarMantenimientos(Resource):
             print('NUEVO mantenimiento.tipo_mantenimiento:', request.json.get('tipo_mantenimiento'))
     
 
-            mantenimiento_schema.load(request.json, session=db.session, instance=mantenimiento, partial=True)
+
+           
+            mantenimiento_en_edicion = json.loads(json.dumps(request.json))
+            
+            mantenimiento_schema.load(mantenimiento_en_edicion, 
+                                      session=db.session, 
+                                      instance=Mantenimiento().query.get(id_mantenimiento), 
+                                      partial=True)
+            
+
             db.session.commit() 
             return mantenimiento_schema.dump(mantenimiento)
         
