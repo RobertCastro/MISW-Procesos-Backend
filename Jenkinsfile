@@ -56,7 +56,7 @@ pipeline {
                 script {
                     docker.image('python:3.9').inside {
                         sh '''
-                            python -m coverage run -m unittest discover -s tests -v
+                            python -m coverage run -m pytest
                             python -m coverage html
                         ''' 
                     }
