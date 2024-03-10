@@ -45,8 +45,9 @@
 * [Burndown chart.xlsx](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/files/14552100/Burndown.chart.xlsx)
 
 
-* [Retrospectiva Equipo 23.pdf](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/files/14552099/Retrospectiva.Equipo.23.pdf)
+* [Retrospectiva Sprint 2 Equipo 23.pdf](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/files/14552099/Retrospectiva.Equipo.23.pdf)
 
+* [Grabación retrospectiva Sprint 2](https://uniandes-my.sharepoint.com/:v:/g/personal/da_gamez96_uniandes_edu_co/EfcQnwRUffFLmynymBh1CtQBpE_axlGUx5VjluAI2Yk8dw)
 
 ### Otros
 * [Guía para la organización de la documentación del proyecto](Guía-organización-documentación-proyecto)
