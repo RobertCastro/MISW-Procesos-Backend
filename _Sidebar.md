@@ -42,7 +42,11 @@
 
 * [Presentación BAD SMELLS](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/files/14475658/Revision.BAD.Smells.Sprint.2.pptx)
 
-* [Burndown Chart Excel](Burndown-Chart-Excel)
+* [Burndown chart.xlsx](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/files/14552100/Burndown.chart.xlsx)
+
+
+* [Retrospectiva Equipo 23.pdf](https://github.com/MISW-4201-ProcesosDesarrolloAgil/MISW4201-202411-Backend-Grupo23/files/14552099/Retrospectiva.Equipo.23.pdf)
+
 
 ### Otros
 * [Guía para la organización de la documentación del proyecto](Guía-organización-documentación-proyecto)
